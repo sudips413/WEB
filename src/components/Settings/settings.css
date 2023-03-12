@@ -1,0 +1,23 @@
+#file:hover{
+    cursor: pointer;
+    
+    border: 2px solid rgb(1, 99, 24);
+
+}
+#file{
+    border-radius: 70%;
+
+}
+#new,#old,#confirm{
+    width: 70%;
+}
+
+@media screen and (max-width: 900px){
+    #new,#old,#confirm{
+        width: 100%;
+    }
+}
+
+.details{
+    color:black
+}

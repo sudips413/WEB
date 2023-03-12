@@ -1,0 +1,81 @@
+
+@import url('../../../node_modules/font-awesome/css/font-awesome.min.css');
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.blogtitle{
+    font-family: 'Inter';
+    font-style: italic;
+    /* identical to box height, or 43px */
+    color: #000000; 
+    text-shadow: -2px 8px 4px rgba(41, 0, 206, 0.29);
+}
+li a{
+width: 120px;
+font-family: 'Inter';
+font-style: italic;
+line-height: 119.52%;
+letter-spacing: 0.17em;
+color: #000000;
+text-shadow: 2px 6px 4px rgba(2, 0, 0, 0.25);
+}
+
+li{
+    margin-right:10px;
+}
+/* .nav-link{
+    font-size: 15px;
+    font-weight: 900;
+} */
+.nav-link:hover{
+    cursor: pointer;
+    color: #7f1db4;
+}
+
+@media screen and (max-width: 850px){
+    .nav-link{
+        font-size: 15px;
+    }
+    li{
+        margin-right: 1px;
+    }
+    .blogtitle{
+        display: none;
+    }
+    .displayMenu{
+        display: block;
+    }
+    .ms-auto{
+        display: none;
+    }
+    #lists{
+        background-color: #ffffff;
+        position: absolute;
+        width: 25%;
+        left:10px;
+        
+        border-radius: 5px;
+        padding-left: 20px;
+    }
+}
+
+
+@media screen and (min-width: 850px){
+    .displayMenu{
+        display: none;
+    }
+    .ms-auto{
+        display: flex;
+        
+    }
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    
+  }
