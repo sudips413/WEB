@@ -60,6 +60,12 @@ li{
         padding-left: 20px;
     }
 }
+@media screen and (max-width: 600px){
+    #lists{
+        width: 40%;
+    }
+   
+}
 
 
 @media screen and (min-width: 850px){

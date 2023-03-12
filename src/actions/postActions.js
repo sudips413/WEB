@@ -4,6 +4,7 @@ const set_posts=(post)=>{
         payload: post
     }
 }
+
 const setAllPosts = {
     set_posts
 }

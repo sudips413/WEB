@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { useDispatch} from 'react-redux';
+import allActions from '../../actions';
 
 
 function Register() {
@@ -8,6 +10,7 @@ function Register() {
     const[mail,setmail]=useState("");
     const[password, setpassword]=useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
   return (
     
     <div className='container'>
@@ -20,21 +23,25 @@ function Register() {
         <form className="form col-12" onSubmit={async (e)=>{
             e.preventDefault();
             if(mail && password && username){
-            await axios.post("https://server-7n65.onrender.com/api/register",{
-                name: username,
-                email: mail,
-                password: password
+                document.getElementById("RegisterIN").style.display="block";
+                await axios.post("https://server-7n65.onrender.com/api/register",{
+                    name: username,
+                    email: mail,
+                    password: password
 
-        
-            })
-            .then((res)=>{
-                document.getElementById("error").innerHTML = res.data.message;
-                navigate('/login')
-            })
-            .catch((err)=>{
-                document.getElementById("error").innerHTML = err.response.data.message;
-            }
-            )
+            
+                })
+                .then((res)=>{
+                    document.getElementById("error").innerHTML = res.data.message;
+                    navigate('/login')
+                    document.getElementById("RegisterIN").style.display="none";
+                    dispatch(allActions.userActions.set_registration_status(true));
+                })
+                .catch((err)=>{
+                    document.getElementById("error").innerHTML = err.response.data.message;
+                    document.getElementById("RegisterIN").style.display="none";
+                }
+                )
 
             }
             else
@@ -81,6 +88,7 @@ function Register() {
             }} required/>
             <br/>
             <button type='submit' className='btn btn-primary'>Signup</button>
+            <span id="RegisterIN" style={{color:"green",display:"none"}}> REGISTERING ...</span>
             <p id="error"></p>
             <label className='label'>Already have an account?</label>
             

@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import { useDispatch} from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -12,6 +12,7 @@ export default function Login() {
     const [error,seterror] = useState(true);
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
+    const regStatus = useSelector(state=>state.registrationStatusReducer.registrationStatus);
     
 
 
@@ -20,17 +21,13 @@ export default function Login() {
     <>
     
     <div className='container'>
-      <div className='row rows'>
-         
-        {/* <div className="logo text-center col-12">
-          <img src="https://cdn.pixabay.com/photo/2012/05/07/18/57/blog-49006_960_720.png" style={{width:"30%"}} alt="logo" />
-        </div> */}
-      
-      
-      
+      <div className='row rows'> 
+      {regStatus && <div className="alert alert-success" role="alert"><i className='fa fa-check'> </i> Registration Success, Please Login</div>}
         <form className="form col-12" onSubmit={async (e)=>{
           e.preventDefault();
+          
           if(email && password){
+            document.getElementById("logIn").style.display="block";
             await axios.post("https://server-7n65.onrender.com/api/login",{
               email:email,
               password:password
@@ -48,9 +45,11 @@ export default function Login() {
 
                 }
                 localStorage.setItem("id",res.data.user._id);
+                dispatch(allActions.userActions.set_registration_status(false));
                 dispatch(allActions.userActions.set_user(obj));
-                dispatch(allActions.setAllPosts.set_posts(res.data.posts));
+                dispatch(allActions.setAllPosts.set_posts(res.data.posts));                
                 window.location.href="/";
+                document.getElementById("logIn").style.display="none";
                 
               }
               else{
@@ -59,11 +58,13 @@ export default function Login() {
                 setTimeout(()=>{
                   seterror(false);
                 },1000);
+                document.getElementById("logIn").style.display="none";
                 
               }
             }
             )
             .catch((err)=>{
+              document.getElementById("logIn").style.display="none";
               document.getElementById("error").innerHTML =  "Credentials are wrong";
               setTimeout(()=>{
                 seterror(false);
@@ -112,13 +113,15 @@ export default function Login() {
           <label className='label' style={{color:"red"}}>forgot password?</label>
           <br/>
           <button type='submit' className='btn btn-primary'>Login</button>
+          <span id="logIn" style={{color:"green",display:"none"}}>Loggin in ...</span>
           {error && <p id="error"></p>}
-          <div className='text'>
+         
+        </form>
+        <div className='text' >
           <label className='label'>No account?</label>
           <br/>
-          <button className='btn btn-dark'>Signup</button>
+          <button className='btn btn-dark' onClick={()=>{navigate('/register')}}>Signup</button>
         </div>  
-        </form>
         
       </div>  
       

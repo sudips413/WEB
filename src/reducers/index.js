@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux'
 import userReducer from './userReducer'
 import postReducer from './postReducer'
+import registrationStatusReducer from './registrationStatus'
 
 const rootReducer = combineReducers({
     userReducer,
-    postReducer
+    postReducer,
+    registrationStatusReducer
 })
 export default rootReducer

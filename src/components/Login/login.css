@@ -66,6 +66,18 @@ input[type=text], input[type=password] {
     align-items: center;
 }
     
+.text{
+    text-align: center;
+}
+.alert{
+    color: green;
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    width:400px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 
 
