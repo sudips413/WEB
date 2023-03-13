@@ -13,6 +13,8 @@ export default function Header() {
     // const [userdetail,setuserdetail]=useState([]);    
     const navigate = useNavigate();
     const currentUser = useSelector(state => state.userReducer);
+    let image = currentUser.currentUser.image;
+    image = image.replace("public/", "");
   return (
     <>
     <header>
@@ -23,7 +25,7 @@ export default function Header() {
             {currentUser.currentUser.loginStatus? 
             (<Link to="/setting" className="navbar-brand fw-bold d-flex">
                 {currentUser.currentUser.image?
-                (<img src={`https://server-7n65.onrender.com/${currentUser.currentUser.image}`} style={{borderRadius:"50%", height:"30px"}} alt="logo" />):
+                (<img src={`https://server-7n65.onrender.com/${image}`} style={{borderRadius:"50%", height:"30px"}} alt="logo" />):
                 null
                 }
                 <span className='blogtitle mt-0'>

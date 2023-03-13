@@ -23,7 +23,7 @@ function Home() {
                 
                     <div className='card-body' >
                         <div className='text-center mb-2'>
-                            <img src={`https://server-7n65.onrender.com/${post.image}`}  className="PostImage" alt="logo"/>
+                            <img src={`https://server-7n65.onrender.com/${post.image.replace("public/","")}`}  className="PostImage" alt="logo"/>
                         </div>
                         <div className='details'>
                             <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>

@@ -14,6 +14,8 @@ export default function Settings() {
     const id = window.localStorage.getItem("id");
     const currentUser = useSelector(state => state.userReducer.currentUser);
     const posts = useSelector(state => state.postReducer.posts)
+    let img = currentUser.image;
+    img = img.replace("public/", "");
   
     
 
@@ -63,7 +65,7 @@ export default function Settings() {
                         setimage(e.target.files[0])
                     }}/>
                     {currentUser.image ?
-                    <label for="file" id="file" ><img src={`https://server-7n65.onrender.com/${currentUser.image}`} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
+                    <label for="file" id="file" ><img src={`https://server-7n65.onrender.com/${img}`} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
                     (<label for="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
                     }
                     <br/>
