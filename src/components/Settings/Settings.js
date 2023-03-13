@@ -15,7 +15,10 @@ export default function Settings() {
     const currentUser = useSelector(state => state.userReducer.currentUser);
     const posts = useSelector(state => state.postReducer.posts)
     let img = currentUser.image;
+    if(img){
     img = img.replace("public/", "");
+    }
+    
   
     
 

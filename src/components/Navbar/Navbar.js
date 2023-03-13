@@ -14,7 +14,9 @@ export default function Header() {
     const navigate = useNavigate();
     const currentUser = useSelector(state => state.userReducer);
     let image = currentUser.currentUser.image;
+    if(image){
     image = image.replace("public/", "");
+    }
   return (
     <>
     <header>
