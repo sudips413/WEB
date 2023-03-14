@@ -14,6 +14,7 @@ import Register from "./components/Register/Register";
 import Home from "./components/Home/Home";
 import Settings from "./components/Settings/Settings";
 import Create from "./components/Edit/Create";
+import Footer from "./components/Footer/Footer";
 
 
 function App() {
@@ -47,10 +48,11 @@ function App() {
     },[])  
   return (
    <>
+   <div className="page-container">
+   
    <Router>
+   <div className="content-wrap">
       <Navbar/>
-    
-      
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/>}/>
@@ -59,10 +61,13 @@ function App() {
         <Route path="/create" element={<Create/>}/>
         <Route path="*" element={<h1>404 Not Found</h1>}/>
       </Routes>
+    </div>  
+    <Footer/>
 
       
 
    </Router>
+  </div> 
    
 
 

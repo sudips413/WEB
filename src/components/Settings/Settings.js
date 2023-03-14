@@ -129,8 +129,8 @@ export default function Settings() {
                                     <div className="card-list">
                                         <div className="card-item">
                                             <div className="card-image">
-                                                <img src={`https://server-7n65.onrender.com/${img}`} alt="logo" style={{height:"10%",width:"10%"}} />
-                                                <span style={{fontFamily:"monospace",color:"purple",fontSize:"25px"}}>{post.title}</span>
+                                                <img src={`https://server-7n65.onrender.com/${img}`} alt="logo" style={{height:"50px",width:"10%",borderRadius:"5px"}} />
+                                                <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>{post.title}</span>
                                             </div>
                                         </div>        
                                     </div> 
