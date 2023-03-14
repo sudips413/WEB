@@ -122,6 +122,7 @@ export default function Settings() {
                     <label style={{color:"orange"}}>My Posts</label>
                     {posts.length >=1 ?( 
                     posts.map((post,index)=>{
+                        let img = post.image.replace("public/", "");
                         if(post.userid===id){
                                return(                
                                 <div className="card-header" key={index}>                                
