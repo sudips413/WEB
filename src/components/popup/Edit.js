@@ -27,7 +27,7 @@ export default function Edit({closepopup,content}) {
                 console.log(content._id);
                     
 
-                axios.put(`https://backend-yg31.onrender.com/api/update/${content._id}`,data,{
+                axios.put(`https://server-7n65.onrender.com/api/update/${content._id}`,data,{
                     headers:{
                         "Content-Type":"multipart/form-data"                      
                     }

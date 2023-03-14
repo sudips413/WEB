@@ -4,16 +4,37 @@ import {useEffect} from 'react'
 import axios from 'axios';
 import {useState} from 'react'
 import "@fontsource/open-sans";
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch} from 'react-redux';
 import Popup from '../popup/Popup';
 import Edit from '../popup/Edit';
+import allActions from '../../actions';
+
 function Home() {
   const [title,settitle] = useState("");
   const [popup,setpopup] = useState(false);
   const [postid,setpostid] = useState(null);
   const [postcontent,setpost] = useState([]);
   const [editpopup,seteditpopup] = useState(false);
+  const dispatch = useDispatch();
+    const id = localStorage.getItem("id");
+    const fetchposts = async()=>{
+        if(!id){
+        await axios.get("https://server-7n65.onrender.com/api/posts")   
+        .then(res=>{
+        dispatch(allActions.setAllPosts.set_posts(res.data));
+      }
+      )
+    }
+    }
+
+
+  useEffect(()=>{
+    fetchposts();
+    },[])
+
   const posts = useSelector(state=>state.postReducer.posts); 
+
+    
   return (
     <div className='container mt-5'>
         {posts.map((post,index)=>{
