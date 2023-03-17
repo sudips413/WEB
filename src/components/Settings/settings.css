@@ -21,3 +21,16 @@
 .details{
     color:black
 }
+.user-activity{
+    color: black;
+    font-size: 15px;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card-header{
+    background-color: white !important;
+    /* no hr */
+    border-bottom: 0px !important;
+}

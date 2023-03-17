@@ -52,78 +52,121 @@ export default function Settings() {
 
 
     }
+    function countPosts(){
+        let count = 0;
+        for(let i=0;i<posts.length;i++){
+            if(posts[i].userid === currentUser.id){
+                count++;
+            }
+        }
+        return count;
+    }
     
        
     
   return (
     <>
-    <div className='container mt-3'>
+    <div className='container mt-5'>
         
         <div className='row'>
             <div className="col-lg-4 col-md-4 col-xs-12">
-                <div className="card">
+                <div className="card card-profile">
                     <div className="card-header text-center">
                         <h3>Profile</h3>
-                    <input type="file" name="file" id="file" className="inputfile" accept='.jpg,.png' style={{display:"none"}} onChange={(e)=>{
-                        setimage(e.target.files[0])
-                    }}/>
-                    {currentUser.image ?
-                    <label for="file" id="file" ><img src={`https://server-7n65.onrender.com/${img}`} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
-                    (<label for="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
-                    }
-                    <br/>
-                    <button className="btn btn-info" onClick={
-                         (e)=>{
-                            e.preventDefault();
-                            if(image.length !== 0){
-                                const data = new FormData();
-                                data.append("file",image);
-                                const id = window.localStorage.getItem("id");
-                                axios.put(`https://server-7n65.onrender.com/api/profile/${id}`,data)
-                                .then(res=>{
-                                    window.location.reload();
-                                    document.getElementById("error").innerHTML = "Profile Picture Updated";
+                        <input type="file" name="file" id="file" className="inputfile" accept='.jpg,.png' style={{display:"none"}} onChange={(e)=>{
+                            setimage(e.target.files[0])
+                        }}/>
+                        {currentUser.image ?
+                        <label for="file" id="file" ><img src={`https://server-7n65.onrender.com/${img}`} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
+                        (<label for="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
+                        }
+                        <br/>
+                        <span style={{fontSize:"18px",fontWeight:"600"}}>{currentUser.username}</span>
+                        <br/>
+                        <button className="btn btn-info mt-3" onClick={
+                            (e)=>{
+                                e.preventDefault();
+                                if(image.length !== 0){
+                                    const data = new FormData();
+                                    data.append("file",image);
+                                    const id = window.localStorage.getItem("id");
+                                    axios.put(`https://server-7n65.onrender.com/api/profile/${id}`,data)
+                                    .then(res=>{
+                                        window.location.reload();
+                                        document.getElementById("error").innerHTML = "Profile Picture Updated";
+                                        setTimeout(()=>{document.getElementById("error").innerHTML = "";},2000)
+                                    }
+                                    )
+                                    .catch(err=>{
+                                        document.getElementById("error").innerHTML = "profile picture not updated";
+                                    }
+                                    )
                                 }
-                                )
-                                .catch(err=>{
-                                    document.getElementById("error").innerHTML = "profile picture not updated";
-                                }
-                                )
-                                
+                                else{
+                                    document.getElementById("error").innerHTML = "Please Select an Image 📷";
+                                    setTimeout(()=>{
+                                        document.getElementById("error").innerHTML = "";
+                                    }
+                                    ,2000)
 
+                                }
+                        }}>Upload</button> 
+                        <div className='row' style={{display:"flex",justifyContent:"space-around",marginTop:"20px"}}>
+                            <div className='col-lg-4 col-md-4 col-xs-4'>
+                                <label>Followers</label>
+                                <h5>0</h5>
+                            </div>
+                            <div className='col-lg-4 col-md-4 col-xs-4'>
+                                <label>Following</label>
+                                <h5>0</h5>
+                            </div>
+                            <div className='col-lg-4 col-md-4 col-xs-4'>
+                                <label>Posts</label>
+                                <h5> {countPosts()}</h5>
+                            </div>
+                        </div>
+                        
+                    </div>                    
+                    <p id ="error" style={{color:"red"}}></p>
+                    <div className="card" style={{border:"none"}}>
+                    <button className="btn btn-view-details btn-info" data-toggle="collapse" data-target="#details" onClick={()=>{
+                            if(document.querySelector(".details").style.display === "none"){
+                                document.querySelector(".details").style.display = "block";
                             }
                             else{
-                                document.getElementById("error").innerHTML = "Please Select an Image";
+                                document.querySelector(".details").style.display = "none";
                             }
-                    }}>Upload</button>
-                    
-                    <p id ="error" style={{color:"red"}}></p>
-                    
-                    </div>
-                    <div className="card-body">
+                        }}>View Details</button>
+                    <div className="card-header text-center" style={{backgroundColor:"white"}}>
+                       
                         <div className="details text-center">
-                            <label>User Details</label>
+                            <label> 🤷 User Details</label>
                             <div>
-                            <span>Name:{currentUser.username}</span>
-                            <br/>
-                            <span>Email: {currentUser.email}   </span>
+                            <span>Username: {currentUser.username}   </span> <br/>
+                            <span>Email: {currentUser.email}</span>
                             </div>
                             
                         </div>
-                    </div>
+                    </div>  
+                </div>     
 
                 </div>
-
+                   
                     
             </div>            
             <div className="col-lg-8 col-md-8 col-xs-12">
                 <div className="row">
-                    <div className="card col-lg-12 col-md-12 col-xs-12">  
-                    <label style={{color:"orange"}}>My Posts</label>
-                    {posts.length >=1 ?( 
+                    <div className="card col-lg-12 col-md-12 col-xs-12"> 
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Follow People</label> 
+                    <span> You dont have Followers.</span>
+                    <button className='btn btn-info' style={{width:"150px"}}>Follow People</button>
+                    <br/>
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Posts</label>
+                    {countPosts()>=1 ?( 
                     posts.map((post,index)=>{
                         let img = post.image.replace("public/", "");
                         if(post.userid===id){
+                                                                                  
                                return(                
                                 <div className="card-header" key={index}>                                
                                     <div className="card-list">
@@ -139,14 +182,14 @@ export default function Settings() {
                             )
                                }    
                         })
-                    ):(null)
+                    ):(<span> You have no posts yet.</span>)
                               
                     } 
                     </div>    
 
 
                     <div className="card col-lg-12 col-md-12 col-xs-12">
-                    <label style={{color:"orange"}}>Change Password</label>
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}}>Change Password</label>
                         <div className="card-header">
                             
                             <br/>

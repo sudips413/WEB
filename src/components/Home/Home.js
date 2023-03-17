@@ -17,11 +17,18 @@ function Home() {
   const [editpopup,seteditpopup] = useState(false);
   const dispatch = useDispatch();
     const id = localStorage.getItem("id");
+    
     const fetchposts = async()=>{
         if(!id){
         await axios.get("https://server-7n65.onrender.com/api/posts")   
         .then(res=>{
-        dispatch(allActions.setAllPosts.set_posts(res.data));
+            let obj = {
+                username:res.data.users.name,
+                email:res.data.users.email,
+                id:res.data.users._id,
+                image:res.data.users.image,
+              }
+        dispatch(allActions.setAllPosts.set_posts(obj));
       }
       )
     }
@@ -36,65 +43,50 @@ function Home() {
 
     
   return (
-    <div className='container mt-5'>
+    <div className='container container-width'>
         {posts.map((post,index)=>{
             return(
-        <div className='row mt-5 mb-0' key={index}>
-            <div className='col-md-12 col-lg-12 col-xs-12'>
-                
-                    <div className='card-body' >
-                        <div className='text-center mb-2'>
-                            <img src={`https://server-7n65.onrender.com/${post.image.replace("public/","")}`}  className="PostImage" alt="logo"/>
-                        </div>
-                        <div className='details'>
-                            <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
-                            <p className='card-content'>
-                                {post.description}
-                            </p>    
-                            <hr/>            
-                            <div className="actions ">
-                                <span className='bottom-action username'>{post.username}</span>
-                               
-                                {
-                                    localStorage.getItem("id")===post.userid?
-                                    <><span className='bottom-action'><i className="fa fa-trash" style={{color:"red"}}
-                                    onClick={(e)=>{
-                                        e.preventDefault();
-                                        setpopup(true);
-                                        settitle(post.title);
-                                        setpostid(post._id);
+            <div className='card-body col-12 mt-5' >
+                <div className='card-image text-center mb-2'>
+                    <img src={`https://server-7n65.onrender.com/${post.image.replace("public/","")}`}  className="PostImage" alt="logo"/>
+                </div>
+                <div className='card-description details'>
+                    <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
+                    <p className='card-content'>
+                        {post.description}
+                    </p>    
+                    <hr/>            
+                    <div className="actions ">
+                        <span className='bottom-action username' style={{fontWeight:'600'}}>👤 {post.username}</span>                        
+                        {
+                            localStorage.getItem("id")===post.userid?
+                            <><span><button className='bottom-action'><i className="fa fa-trash" style={{color:"red"}}
+                            onClick={(e)=>{
+                                e.preventDefault();
+                                setpopup(true);
+                                settitle(post.title);
+                                setpostid(post._id);
+                            }
+                            }
+                            /> Delete</button></span>
+                            <span>
+                            <button className='bottom-action' ><i className="fa fa-edit" style={{color:"green"}}
+                            onClick={(e)=>{
+                                e.preventDefault();
+                                seteditpopup(true);
+                                setpost(post)
+                            }
+                            }/> Edit</button></span>
+                            </>
+                            :null
 
-                                    }
-                                        
-
-                                    }
-                                    /> Delete</span>
-                                    <span className='bottom-action' ><i className="fa fa-edit" style={{color:"green"}}
-                                    onClick={(e)=>{
-                                        e.preventDefault();
-                                        seteditpopup(true);
-                                        setpost(post)
-                                        
-
-                                    }
-                                        
-
-                                    }/> Edit</span>
-                                    </>
-                                    :null
-
-                                }
-                                 <span className='bottom-action'><i className="fa fa-clock-o"/> {new Date(post.date).toDateString()}</span>
-                            </div>
-
-                        </div>
+                        }
+                        <span className='bottom-action'><i className="fa fa-clock-o"/> {new Date(post.date).toDateString()}</span>
                     </div>
-                    
-            </div> 
-            
-             
-        </div>)
-        
+                    <hr/> 
+                </div>
+            </div>  
+        )        
         })
         }
         {popup?
@@ -107,8 +99,7 @@ function Home() {
             seteditpopup(false);
         }
         }content={postcontent}/>:null
-    }
-        
+    }        
     </div>            
   )
 }
