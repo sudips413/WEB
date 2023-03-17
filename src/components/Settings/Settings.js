@@ -10,10 +10,13 @@ export default function Settings() {
     const[newpassword,setnewpassword]=useState("");
     const[confirmpassword,setconfirmpassword]=useState("");
     const [wait,setwait]=useState(true);
+    const [followText,setFollowText] = useState("+ Follow");
   
     const id = window.localStorage.getItem("id");
     const currentUser = useSelector(state => state.userReducer.currentUser);
     const posts = useSelector(state => state.postReducer.posts)
+    const users =useSelector(state => state.userAllReducer.users)
+    console.log(users)
     let img = currentUser.image;
     if(img){
     img = img.replace("public/", "");
@@ -66,13 +69,12 @@ export default function Settings() {
     
   return (
     <>
-    <div className='container mt-5'>
-        
+    <div className='container mt-5 '>
         <div className='row'>
-            <div className="col-lg-4 col-md-4 col-xs-12">
+            <div className="col-lg-3 col-md-3 col-xs-12">
                 <div className="card card-profile">
                     <div className="card-header text-center">
-                        <h3>Profile</h3>
+
                         <input type="file" name="file" id="file" className="inputfile" accept='.jpg,.png' style={{display:"none"}} onChange={(e)=>{
                             setimage(e.target.files[0])
                         }}/>
@@ -154,12 +156,13 @@ export default function Settings() {
                    
                     
             </div>            
-            <div className="col-lg-8 col-md-8 col-xs-12">
-                <div className="row">
+            <div className="col-lg-6 col-md-6 col-xs-12">
+                <div className="row " style={{}}>
                     <div className="card col-lg-12 col-md-12 col-xs-12"> 
-                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Follow People</label> 
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Followers</label> 
+                    <span> You dont have Followers.</span>                    
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Following</label> 
                     <span> You dont have Followers.</span>
-                    <button className='btn btn-info' style={{width:"150px"}}>Follow People</button>
                     <br/>
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Posts</label>
                     {countPosts()>=1 ?( 
@@ -234,7 +237,41 @@ export default function Settings() {
                         </div>
                     </div>
                 </div>    
-            </div>               
+            </div>  
+            <div className="col-lg-3 col-md-2col-xs-12">
+                <div className="card">
+                    <span style={{color:"orange",fontSize:"15px",fontWeight:"600"}}>People You may Know</span>
+                    <br/>
+                    {
+                        users.map((user,index)=>{
+                            return(
+                                <div className="card-header" key={index}>
+                                    <img src={user.image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"5px"}} />
+                                    <span >{user.username}</span>
+                                    <br/>
+                                    <button className='btn btn-follow' onClick={()=>{
+                                        
+                                        if (document.querySelector(".btn-follow").style.backgroundColor==="green"){
+                                            setFollowText("+ Follow")
+                                            document.querySelector(".btn-follow").style.backgroundColor="white"
+                                            document.querySelector(".btn-follow").style.color="black"
+                                            
+                                        }
+                                        else{
+                                            setFollowText("Following")
+                                            document.querySelector(".btn-follow").style.backgroundColor="green"
+                                            document.querySelector(".btn-follow").style.color="white"
+                                        }
+                                    }}> {followText}</button>
+
+                                </div>
+                            )
+                        })
+                    }
+
+                    <button className='btn btn-info' style={{width:"150px"}}>Follow More</button>
+                </div>    
+            </div>                 
 
 
         </div>          
