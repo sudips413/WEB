@@ -34,7 +34,6 @@ function Home() {
     },[])
 
   const posts = useSelector(state=>state.postReducer.posts); 
-  console.log(posts);
   
 
     

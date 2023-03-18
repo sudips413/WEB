@@ -12,7 +12,6 @@ function SinglePost() {
     const [editpopup,seteditpopup] = useState(false);  
     const postid = localStorage.getItem("postId");
     const posts = useSelector(state=>state.postReducer.posts);
-    console.log(posts);
   return (    
     <div className='container'>
     <div className='row mt-5'>
