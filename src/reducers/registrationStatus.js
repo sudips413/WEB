@@ -1,5 +1,6 @@
 const initialState = {
     registrationStatus: false
+    
     };
 function registrationStatusReducer(state = initialState, action) {
     switch(action.type){

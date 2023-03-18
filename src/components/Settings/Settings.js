@@ -7,6 +7,7 @@ import Cardheader from './Cardheader';
 import { useNavigate } from 'react-router-dom';
 import allActions from '../../actions';
 
+
 export default function Settings() {
     
     const[oldpassword,setoldpassword]=useState("");
@@ -86,6 +87,7 @@ export default function Settings() {
     const allUser = useSelector(state => state.userAllReducer.users); 
   return (
     <>
+    
     <div className='container mt-5 '>
         <div className='row'>
             <div className="col-lg-3 col-md-3 col-sm-8 col-xs-12">

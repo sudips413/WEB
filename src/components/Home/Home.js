@@ -8,37 +8,42 @@ import { useSelector,useDispatch} from 'react-redux';
 import Popup from '../popup/Popup';
 import Edit from '../popup/Edit';
 import allActions from '../../actions';
-
 function Home() {
   const [title,settitle] = useState("");
   const [popup,setpopup] = useState(false);
   const [postid,setpostid] = useState(null);
   const [postcontent,setpost] = useState([]);
-  const [editpopup,seteditpopup] = useState(false);
+  const [editpopup,seteditpopup] = useState(false); 
   const dispatch = useDispatch();
   const id = localStorage.getItem("id");
-    
+  
     const fetchposts = async()=>{
     if (!id){ 
+        dispatch(allActions.userActions.set_loading_status(true));      
         await axios.get("https://blog-1pne.onrender.com/api/posts")   
         .then(res=>{
-        dispatch(allActions.setAllPosts.set_posts(res.data));
+          
+        dispatch(allActions.setAllPosts.set_posts(res.data)); 
+
+           
       }
       )
     }
-}
+    }
 
 
   useEffect(()=>{
-    fetchposts();
-    },[])
-
-  const posts = useSelector(state=>state.postReducer.posts); 
-  
-
     
+    fetchposts();
+    
+    
+    },[])
+    const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
+  const posts = useSelector(state=>state.postReducer.posts); 
   return (
+    
     <div className='container container-width'>
+        {isLoading? <center><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
         { posts? posts.map((post,index)=>{
             let base64 = btoa(
                 new Uint8Array(post.image.data.data).reduce(

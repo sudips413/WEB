@@ -4,12 +4,13 @@ import postReducer from './postReducer'
 import registrationStatusReducer from './registrationStatus'
 import userAllReducer from './userList'
 import currentPostIDReducer from './singlePostReducer'
+import loadingStatusReducer from './loadingStatus'
 
 const rootReducer = combineReducers({
     userReducer,
     postReducer,
     registrationStatusReducer,
     userAllReducer,
-    currentPostIDReducer
+    currentPostIDReducer,loadingStatusReducer
 })
 export default rootReducer

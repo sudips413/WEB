@@ -16,11 +16,17 @@ const set_registration_status=(status)=>{
         payload: status
     }
 }
+const set_loading_status=(status)=>{
+    return {
+        type:"SET_LOADING_STATUS",
+        payload: status
+    }
+}
 
 
 
 
 const userActions ={
-    set_user,logout,set_registration_status
+    set_user,logout,set_registration_status,set_loading_status
 }
 export default userActions
