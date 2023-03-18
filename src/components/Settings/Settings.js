@@ -202,6 +202,7 @@ export default function Settings() {
                                             <div className="card-image" >
                                                 <img src={img} alt="logo" style={{height:"50px",width:"50px",borderRadius:"5px"}} />
                                                 <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>{post.title}</span>
+                                                <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>view <i className='fa fa-eye'></i></span>
                                             </div>
                                         </div>        
                                     </div> 
