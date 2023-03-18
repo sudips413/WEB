@@ -23,7 +23,7 @@ function App() {
   const id = localStorage.getItem("id");
   async function fetchFromId() {
     if (id) {
-      const res = await axios.get(`http://localhost:4000/api/user/${id}`);
+      const res = await axios.get(`https://server-7n65.onrender.com/api/user/${id}`);
       const user = res.data.users;
       const obj = {
         username: user.name,
@@ -34,7 +34,7 @@ function App() {
       dispatch(allActions.userActions.set_user(obj));
     }
     
-    const res = await axios.get("http://localhost:4000/api/posts");
+    const res = await axios.get("https://server-7n65.onrender.com/api/posts");
     const posts = res.data;
     dispatch(allActions.setAllPosts.set_posts(posts));
   }

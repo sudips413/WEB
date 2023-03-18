@@ -34,12 +34,13 @@ function Home() {
     },[])
 
   const posts = useSelector(state=>state.postReducer.posts); 
+  console.log(posts);
   
 
     
   return (
     <div className='container container-width'>
-        {posts.map((post,index)=>{
+        { posts ? posts.map((post,index)=>{
             let base64 = btoa(
                 new Uint8Array(post.image.data.data).reduce(
                     (data, byte) => data + String.fromCharCode(byte),
@@ -89,7 +90,10 @@ function Home() {
                 </div>
             </div>  
         )        
-        })
+        }):
+        <div className="spinner-border text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+        </div>
         }
         {popup?
         <Popup closepopup={()=>{
