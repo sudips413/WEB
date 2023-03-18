@@ -20,7 +20,7 @@ function Home() {
     
     const fetchposts = async()=>{
         if(!id){
-        await axios.get("http://localhost:4000/api/posts")   
+        await axios.get("https://server-7n65.onrender.com/api/posts")   
         .then(res=>{
         dispatch(allActions.setAllPosts.set_posts(res.data));
       }

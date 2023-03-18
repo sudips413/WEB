@@ -42,7 +42,7 @@ export default function Create() {
                         data.append("userid",currentUser.id);
                         data.append("username",currentUser.username);
                         
-                        axios.post("http://localhost:4000/api/create",data,{
+                        axios.post("https://server-7n65.onrender.com/api/create",data,{
                             headers:{
                                 "Content-Type":"multipart/form-data"                       }
 
