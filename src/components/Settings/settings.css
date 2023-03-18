@@ -67,12 +67,35 @@
     height: auto;
 }
 .single-card-link{
-    cursor: pointer;
     text-decoration: none;
-    width: 60%;
-
-}
-.single-card-link:hover{
+    width: 100%;
     background: linear-gradient(to bottom, rgba(42, 145, 156, 0.662) 10%, rgba(216, 211, 211, 0.5) 70%, rgb(187, 190, 213) 100%);
     border-radius: 5px;
+
 }
+.view-btn{
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: 'Philosopher', sans-serif;
+    margin : auto;
+    cursor:pointer;
+    border:none;
+    height: 22px;
+}
+.card-post-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (max-width: 900px){
+    .card-post-info{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .view-btn{
+        margin-bottom: 10px;
+        margin-left: 20px;
+
+    }
+}
+

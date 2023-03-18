@@ -190,19 +190,20 @@ export default function Settings() {
                                                                                   
                                return(                
                                 <div className="card-header" key={index}>                                
-                                    <div className="card-list">
-                                        <div className="card-item single-card-link" onClick={(e)=>{
-                                            e.preventDefault();
-                                            dispatch(allActions.set_postId(post._id));
-                                            localStorage.setItem("postId",post._id);
-                                            window.location.href = "/singlepost/"+post._id;
-                                                
-                                                
-                                            }}>
-                                            <div className="card-image" >
-                                                <img src={img} alt="logo" style={{height:"50px",width:"50px",borderRadius:"5px"}} />
+                                    <div className="card-list text-center">
+                                        <div className="card-item single-card-link" >
+                                            <div className="card-image card-post-info" >
+                                                <img src={img} alt="logo" style={{height:"100px",width:"100px",borderRadius:"5px",padding:"10px"}} />
                                                 <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>{post.title}</span>
-                                                <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>view <i className='fa fa-eye'></i></span>
+                                                <button className='view-btn' 
+                                                onClick={(e)=>{
+                                                    e.preventDefault();
+                                                    dispatch(allActions.set_postId(post._id));
+                                                    localStorage.setItem("postId",post._id);
+                                                    window.location.href = "/singlepost/"+post._id;
+                                                        
+                                                        
+                                                    }}>view <i className='fa fa-eye'></i></button>
                                             </div>
                                         </div>        
                                     </div> 
