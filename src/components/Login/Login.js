@@ -13,6 +13,8 @@ export default function Login() {
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
     const regStatus = useSelector(state=>state.registrationStatusReducer.registrationStatus);
+    const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
+    console.log(regStatus);
     
 
 
@@ -27,6 +29,7 @@ export default function Login() {
           e.preventDefault();
           
           if(email && password){
+            dispatch(allActions.userActions.set_loading_status(true));
             document.getElementById("logIn").style.display="block";
             await axios.post("https://blog-1pne.onrender.com/api/login",{
               email:email,
@@ -87,6 +90,7 @@ export default function Login() {
           },500);
           seterror(true);
         }
+        dispatch(allActions.userActions.set_loading_status(false));
             
         }}>
           <h2>SIGN IN</h2>
@@ -119,6 +123,7 @@ export default function Login() {
           <br/>
           <button type='submit' className='btn btn-primary'>Login</button>
           <span id="logIn" style={{color:"green",display:"none"}}>Loggin in ...</span>
+          {isLoading? <center><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
           {error && <p id="error"></p>}
          
         </form>

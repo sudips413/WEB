@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import { useDispatch} from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import allActions from '../../actions';
 
 
@@ -11,6 +11,7 @@ function Register() {
     const[password, setpassword]=useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
   return (
     
     <div className='container'>
@@ -18,11 +19,13 @@ function Register() {
         {/* <div className="logo text-center">
             <img src="https://cdn.pixabay.com/photo/2012/05/07/18/57/blog-49006_960_720.png" alt="logo" style={{width:"40%"}} />
         </div> */}
-        
+        <center><div class="lds-roller mt-5" id="registerLoading"style={{display:"none"}}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>
       
         <form className="form col-12" onSubmit={async (e)=>{
             e.preventDefault();
+            document.getElementById("registerLoading").style.display="block";  
             if(mail && password && username){
+                              
                 document.getElementById("RegisterIN").style.display="block";
                 await axios.post("https://blog-1pne.onrender.com/api/register",{
                     name: username,
@@ -45,9 +48,13 @@ function Register() {
 
             }
             else
-            {
+            {   
+                dispatch(allActions.userActions.set_loading_status(false));
                 document.getElementById("error").innerHTML = "Password requires both upper and lower case letters, numbers or invalid email";
             }
+            document.getElementById("registerLoading").style.display="none";  
+           
+            
         }}>
             <h2>SIGN UP</h2>
            
@@ -90,6 +97,7 @@ function Register() {
             <button type='submit' className='btn btn-primary'>Signup</button>
             <span id="RegisterIN" style={{color:"green",display:"none"}}> REGISTERING ...</span>
             <p id="error"></p>
+            
             <label className='label'>Already have an account?</label>
             
             <button className='btn btn-danger' onClick={(e)=>{

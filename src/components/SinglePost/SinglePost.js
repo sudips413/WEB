@@ -12,6 +12,7 @@ function SinglePost() {
     const [editpopup,seteditpopup] = useState(false);  
     const postid = localStorage.getItem("postId");
     const posts = useSelector(state=>state.postReducer.posts);
+    const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
   return (    
     <div className='container'>
     <div className='row mt-5'>
@@ -33,6 +34,7 @@ function SinglePost() {
         </div>
         </div>
         <div className='col-lg-8 col-md-8 col-sm-8 col-xs-10'>
+        {isLoading? <center><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
             { 
                 posts.map((post,index)=>{
                     // if (postid === post._id){

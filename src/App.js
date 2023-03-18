@@ -24,7 +24,7 @@ function App() {
   async function fetchFromId() {
      
     if (id) {
-      dispatch(allActions.userActions.set_loading_status(true)); 
+      
       const res = await axios.get(`https://blog-1pne.onrender.com/api/user/${id}`);
       const user = res.data.users;
       const obj = {
@@ -42,7 +42,7 @@ function App() {
   }
 
   useEffect(() => {
-    
+    dispatch(allActions.userActions.set_loading_status(true));     
     fetchFromId();
   }, []);
 
