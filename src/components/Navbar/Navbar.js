@@ -33,7 +33,7 @@ export default function Header() {
             <div className="container-fluid ">
             {currentUser.currentUser.loginStatus? 
             (<Link to="/setting" className="navbar-brand fw-bold d-flex">
-                {currentUser.currentUser.image?
+                {currentUser.currentUser.image.data.data !== []?
 
                 (
                 <div className='circular-image'>

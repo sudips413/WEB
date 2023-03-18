@@ -28,6 +28,7 @@ export default function Settings() {
     let img = '';
 
     if (currentUser.image) {
+        
         const image64 = btoa(
             new Uint8Array(currentUser.image.data.data).reduce(
                 (data, byte) => data + String.fromCharCode(byte),
@@ -41,7 +42,7 @@ export default function Settings() {
     const [image,setimage]=useState([])
     function changepassword(e){
         e.preventDefault();
-        console.log(oldpassword,newpassword,confirmpassword)
+        
         const id = window.localStorage.getItem("id");
         if(newpassword===confirmpassword){
             // https://blog-1pne.onrender.com
@@ -52,7 +53,7 @@ export default function Settings() {
                 }
                 )
             .then(res=>{
-                console.log(res.data);
+                
                 document.getElementById("err").innerHTML=res.data.message;
                 setTimeout(()=>{
                     setwait(false);
@@ -94,9 +95,9 @@ export default function Settings() {
                         <input type="file" name="file" id="file" className="inputfile" accept='.jpg,.png' style={{display:"none"}} onChange={(e)=>{
                             setimage(e.target.files[0])
                         }}/>
-                        {currentUser.image ?
+                        {currentUser.image.data.data !==[]?
                         <label htmlFor="file" id="file" ><img src={img} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
-                        (<label for="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
+                        (<label htmlFor="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
                         }
                         <br/>
                         <span style={{fontSize:"18px",fontWeight:"600"}}>{currentUser.username}</span>
