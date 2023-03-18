@@ -28,7 +28,7 @@ export default function Login() {
           
           if(email && password){
             document.getElementById("logIn").style.display="block";
-            await axios.post("https://server-7n65.onrender.com/api/login",{
+            await axios.post("https://blog-1pne.onrender.com/api/login",{
               email:email,
               password:password
 
@@ -48,7 +48,7 @@ export default function Login() {
                 dispatch(allActions.userActions.set_registration_status(false));
                 dispatch(allActions.userActions.set_user(obj));
                 dispatch(allActions.setAllPosts.set_posts(res.data.posts));  
-                axios.get("https://server-7n65.onrender.com/api/posts")
+                axios.get("https://blog-1pne.onrender.com/api/posts")
                 .then((res)=>{
                   dispatch(allActions.setAllPosts.set_posts(res.data));
                 })                   

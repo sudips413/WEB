@@ -27,7 +27,7 @@ export default function Edit({closepopup,content}) {
                 data.append("username",currentUser.username);
                 
 
-                axios.put(`https://server-7n65.onrender.com/api/update/${content._id}`,data,{
+                axios.put(`https://blog-1pne.onrender.com/api/update/${content._id}`,data,{
                     headers:{
                         "Content-Type":"multipart/form-data"                      
                     }

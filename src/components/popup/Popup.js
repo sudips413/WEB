@@ -21,7 +21,7 @@ export default function Popup({closepopup,title,id}) {
             <br/>
             <button type="submit" className="btn btn-danger" onClick={(e)=>{
                 e.preventDefault();
-                axios.delete(`https://server-7n65.onrender.com/api/delete/${id}`)
+                axios.delete(`https://blog-1pne.onrender.com/api/delete/${id}`)
                 .then(res=>{
                     document.getElementById("error").innerHTML=res.data.message;
                     setTimeout(() => {

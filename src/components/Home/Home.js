@@ -16,17 +16,17 @@ function Home() {
   const [postcontent,setpost] = useState([]);
   const [editpopup,seteditpopup] = useState(false);
   const dispatch = useDispatch();
-    const id = localStorage.getItem("id");
+  const id = localStorage.getItem("id");
     
     const fetchposts = async()=>{
-        if(!id){
-        await axios.get("https://server-7n65.onrender.com/api/posts")   
+    if (!id){ 
+        await axios.get("https://blog-1pne.onrender.com/api/posts")   
         .then(res=>{
         dispatch(allActions.setAllPosts.set_posts(res.data));
       }
       )
     }
-    }
+}
 
 
   useEffect(()=>{
@@ -40,7 +40,7 @@ function Home() {
     
   return (
     <div className='container container-width'>
-        { posts ? posts.map((post,index)=>{
+        { posts? posts.map((post,index)=>{
             let base64 = btoa(
                 new Uint8Array(post.image.data.data).reduce(
                     (data, byte) => data + String.fromCharCode(byte),

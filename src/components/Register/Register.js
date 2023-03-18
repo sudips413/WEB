@@ -24,7 +24,7 @@ function Register() {
             e.preventDefault();
             if(mail && password && username){
                 document.getElementById("RegisterIN").style.display="block";
-                await axios.post("https://server-7n65.onrender.com/api/register",{
+                await axios.post("https://blog-1pne.onrender.com/api/register",{
                     name: username,
                     email: mail,
                     password: password

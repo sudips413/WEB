@@ -44,8 +44,8 @@ export default function Settings() {
         console.log(oldpassword,newpassword,confirmpassword)
         const id = window.localStorage.getItem("id");
         if(newpassword===confirmpassword){
-            // https://server-7n65.onrender.com
-            axios.put(`https://server-7n65.onrender.com/api/changepassword/${id}`,
+            // https://blog-1pne.onrender.com
+            axios.put(`https://blog-1pne.onrender.com/api/changepassword/${id}`,
             {
                 oldpassword:oldpassword,
                 newpassword:newpassword
@@ -108,7 +108,7 @@ export default function Settings() {
                                     const data = new FormData();
                                     data.append("file",image);
                                     const id = window.localStorage.getItem("id");
-                                    axios.put(`https://server-7n65.onrender.com/api/profile/${id}`,data)
+                                    axios.put(`https://blog-1pne.onrender.com/api/profile/${id}`,data)
                                     .then(res=>{
                                         window.location.reload();
                                         document.getElementById("error").innerHTML = "Profile Picture Updated";
