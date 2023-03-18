@@ -1,8 +1,11 @@
-const get_user=(userinfo)=>{
+const get_user=(user)=>{
     return {
         type:"GET_USER",
-        payload: userinfo
+        payload: user
     }
 }
+const getAllUsers = {
+    get_user
+}
 
-export default get_user
+export default getAllUsers

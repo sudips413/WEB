@@ -1,11 +1,13 @@
 import React from 'react'
 import './edit.css'
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 export default function Edit({closepopup,content}) {
     const[newtitle,setnewtitle]=React.useState(content.title);
     const[newcontent,setnewcontent]=React.useState(content.description);
     const image = document.getElementById("image");
+    const currentUser = useSelector(state => state.userReducer.currentUser);
 
     return (
     <div className="popup-container">
@@ -22,10 +24,8 @@ export default function Edit({closepopup,content}) {
                 data.append("description",newcontent);
                 data.append("file",image);
                 data.append("userid",window.localStorage.getItem("id"));
-                data.append("username",window.localStorage.getItem("user"));
-                console.log(data);
-                console.log(content._id);
-                    
+                data.append("username",currentUser.username);
+                
 
                 axios.put(`https://server-7n65.onrender.com/api/update/${content._id}`,data,{
                     headers:{

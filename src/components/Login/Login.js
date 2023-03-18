@@ -28,7 +28,7 @@ export default function Login() {
           
           if(email && password){
             document.getElementById("logIn").style.display="block";
-            await axios.post("https://server-7n65.onrender.com/api/login",{
+            await axios.post("http://localhost:4000/api/login",{
               email:email,
               password:password
 
@@ -47,9 +47,14 @@ export default function Login() {
                 localStorage.setItem("id",res.data.user._id);
                 dispatch(allActions.userActions.set_registration_status(false));
                 dispatch(allActions.userActions.set_user(obj));
-                dispatch(allActions.setAllPosts.set_posts(res.data.posts));                
-                window.location.href="/";
+                dispatch(allActions.setAllPosts.set_posts(res.data.posts));  
+                axios.get("http://localhost:4000/api/posts")
+                .then((res)=>{
+                  dispatch(allActions.setAllPosts.set_posts(res.data));
+                })                   
+                navigate("/");
                 document.getElementById("logIn").style.display="none";
+                    
                 
               }
               else{

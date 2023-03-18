@@ -11,11 +11,18 @@ import { useSelector } from 'react-redux';
 export default function Header() {
     const dispatch = useDispatch();
     // const [userdetail,setuserdetail]=useState([]);    
-    const navigate = useNavigate();
+  
     const currentUser = useSelector(state => state.userReducer);
     let image = currentUser.currentUser.image;
+   
     if(image){
-    image = image.replace("public/", "");
+        const image64 = btoa(
+            new Uint8Array(image.data.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                '',
+            ),
+        );
+        image = `data:${image.contentType};base64,${image64}`;
     }
   return (
     <>
@@ -27,7 +34,12 @@ export default function Header() {
             {currentUser.currentUser.loginStatus? 
             (<Link to="/setting" className="navbar-brand fw-bold d-flex">
                 {currentUser.currentUser.image?
-                (<img src={`https://server-7n65.onrender.com/${image}`} style={{borderRadius:"50%", height:"30px"}} alt="logo" />):
+
+                (
+                <div className='circular-image'>
+                <img src={image} alt="logo" />
+                </div>
+                ):
                 null
                 }
                 <span className='blogtitle mt-0'>

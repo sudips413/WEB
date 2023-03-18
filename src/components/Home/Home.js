@@ -20,15 +20,9 @@ function Home() {
     
     const fetchposts = async()=>{
         if(!id){
-        await axios.get("https://server-7n65.onrender.com/api/posts")   
+        await axios.get("http://localhost:4000/api/posts")   
         .then(res=>{
-            let obj = {
-                username:res.data.users.name,
-                email:res.data.users.email,
-                id:res.data.users._id,
-                image:res.data.users.image,
-              }
-        dispatch(allActions.setAllPosts.set_posts(obj));
+        dispatch(allActions.setAllPosts.set_posts(res.data));
       }
       )
     }
@@ -40,15 +34,23 @@ function Home() {
     },[])
 
   const posts = useSelector(state=>state.postReducer.posts); 
+  
 
     
   return (
     <div className='container container-width'>
         {posts.map((post,index)=>{
+            let base64 = btoa(
+                new Uint8Array(post.image.data.data).reduce(
+                    (data, byte) => data + String.fromCharCode(byte),
+                    '',
+                ),
+            );
+            let image = `data:${post.image.contentType};base64,${base64}`;
             return(
-            <div className='card-body col-12 mt-5' >
+            <div className='card-body col-12 mt-5' key={index} >
                 <div className='card-image text-center mb-2'>
-                    <img src={`https://server-7n65.onrender.com/${post.image.replace("public/","")}`}  className="PostImage" alt="logo"/>
+                    <img src={image}  className="PostImage" alt="logo"/>
                 </div>
                 <div className='card-description details'>
                     <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
@@ -60,23 +62,23 @@ function Home() {
                         <span className='bottom-action username' style={{fontWeight:'600'}}>👤 {post.username}</span>                        
                         {
                             localStorage.getItem("id")===post.userid?
-                            <><span><button className='bottom-action'><i className="fa fa-trash" style={{color:"red"}}
-                            onClick={(e)=>{
+                            <><span onClick={(e)=>{
                                 e.preventDefault();
                                 setpopup(true);
                                 settitle(post.title);
                                 setpostid(post._id);
                             }
-                            }
+                            }><button className='bottom-action'><i className="fa fa-trash" style={{color:"red"}}
+                            
                             /> Delete</button></span>
-                            <span>
-                            <button className='bottom-action' ><i className="fa fa-edit" style={{color:"green"}}
-                            onClick={(e)=>{
+                            <span onClick={(e)=>{
                                 e.preventDefault();
                                 seteditpopup(true);
                                 setpost(post)
                             }
-                            }/> Edit</button></span>
+                            }>
+                            <button className='bottom-action' ><i className="fa fa-edit" style={{color:"green"}}
+                            /> Edit</button></span>
                             </>
                             :null
 

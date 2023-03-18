@@ -2,7 +2,10 @@ import React, { useEffect,useState } from 'react'
 import logo from '../../components/image/me.jpg'
 import './settings.css'
 import axios from 'axios';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import Cardheader from './Cardheader';
+import { useNavigate } from 'react-router-dom';
+import allActions from '../../actions';
 
 export default function Settings() {
     
@@ -10,33 +13,46 @@ export default function Settings() {
     const[newpassword,setnewpassword]=useState("");
     const[confirmpassword,setconfirmpassword]=useState("");
     const [wait,setwait]=useState(true);
-    const [followText,setFollowText] = useState("+ Follow");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    //to view details of user
+    const [isDisplaying, setIsDisplaying] = useState(false);
+    function handleDisplayClick() {
+        setIsDisplaying(!isDisplaying);
+    }
+    
   
     const id = window.localStorage.getItem("id");
     const currentUser = useSelector(state => state.userReducer.currentUser);
     const posts = useSelector(state => state.postReducer.posts)
-    const users =useSelector(state => state.userAllReducer.users)
-    console.log(users)
-    let img = currentUser.image;
-    if(img){
-    img = img.replace("public/", "");
-    }
-    
-  
-    
+    let img = '';
 
+    if (currentUser.image) {
+        const image64 = btoa(
+            new Uint8Array(currentUser.image.data.data).reduce(
+                (data, byte) => data + String.fromCharCode(byte),
+                '',
+            ),
+        );
+        img = `data:${currentUser.image.contentType};base64,${image64}`;
+    }
+    //fetch all the users
+    
     const [image,setimage]=useState([])
     function changepassword(e){
         e.preventDefault();
+        console.log(oldpassword,newpassword,confirmpassword)
         const id = window.localStorage.getItem("id");
         if(newpassword===confirmpassword){
-            axios.put(`https://server-7n65.onrender.com/api/changepassword/${id}`,
+            // https://server-7n65.onrender.com
+            axios.put(`http://localhost:4000/api/changepassword/${id}`,
             {
                 oldpassword:oldpassword,
                 newpassword:newpassword
                 }
                 )
             .then(res=>{
+                console.log(res.data);
                 document.getElementById("err").innerHTML=res.data.message;
                 setTimeout(()=>{
                     setwait(false);
@@ -66,12 +82,12 @@ export default function Settings() {
     }
     
        
-    
+    const allUser = useSelector(state => state.userAllReducer.users); 
   return (
     <>
     <div className='container mt-5 '>
         <div className='row'>
-            <div className="col-lg-3 col-md-3 col-xs-12">
+            <div className="col-lg-3 col-md-3 col-sm-8 col-xs-12">
                 <div className="card card-profile">
                     <div className="card-header text-center">
 
@@ -79,7 +95,7 @@ export default function Settings() {
                             setimage(e.target.files[0])
                         }}/>
                         {currentUser.image ?
-                        <label for="file" id="file" ><img src={`https://server-7n65.onrender.com/${img}`} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
+                        <label htmlFor="file" id="file" ><img src={img} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
                         (<label for="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
                         }
                         <br/>
@@ -92,7 +108,7 @@ export default function Settings() {
                                     const data = new FormData();
                                     data.append("file",image);
                                     const id = window.localStorage.getItem("id");
-                                    axios.put(`https://server-7n65.onrender.com/api/profile/${id}`,data)
+                                    axios.put(`http://localhost:4000/api/profile/${id}`,data)
                                     .then(res=>{
                                         window.location.reload();
                                         document.getElementById("error").innerHTML = "Profile Picture Updated";
@@ -130,35 +146,32 @@ export default function Settings() {
                         
                     </div>                    
                     <p id ="error" style={{color:"red"}}></p>
-                    <div className="card" style={{border:"none"}}>
-                    <button className="btn btn-view-details btn-info" data-toggle="collapse" data-target="#details" onClick={()=>{
-                            if(document.querySelector(".details").style.display === "none"){
-                                document.querySelector(".details").style.display = "block";
-                            }
-                            else{
-                                document.querySelector(".details").style.display = "none";
-                            }
-                        }}>View Details</button>
-                    <div className="card-header text-center" style={{backgroundColor:"white"}}>
-                       
+                    <div className="card mb-2" style={{border:"none"}}>
+                    <button className="btn btn-view-details" data-toggle="collapse" data-target="#details" onClick={()=>{
+                        handleDisplayClick();
+
+                            
+                        }}> View Details {isDisplaying? <i class="fa fa-arrow-up"></i>: <i class="fa fa-arrow-down"></i>}</button>
+                    {isDisplaying &&
+                    <div className="card-header text-center mb-4" style={{backgroundColor:"white"}}>                       
                         <div className="details text-center">
                             <label> 🤷 User Details</label>
                             <div>
                             <span>Username: {currentUser.username}   </span> <br/>
                             <span>Email: {currentUser.email}</span>
                             </div>
-                            
                         </div>
-                    </div>  
+                    </div> 
+                    } 
                 </div>     
 
                 </div>
                    
                     
             </div>            
-            <div className="col-lg-6 col-md-6 col-xs-12">
-                <div className="row " style={{}}>
-                    <div className="card col-lg-12 col-md-12 col-xs-12"> 
+            <div className="col-lg-6 col-md-6 col-sm-8 col-xs-10">
+                <div className="row card-content-password">
+                    <div className="card col-lg-12 col-md-12 col-xs-12 card-content"> 
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Followers</label> 
                     <span> You dont have Followers.</span>                    
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Following</label> 
@@ -167,15 +180,26 @@ export default function Settings() {
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Posts</label>
                     {countPosts()>=1 ?( 
                     posts.map((post,index)=>{
-                        let img = post.image.replace("public/", "");
+                        let base64 = btoa(
+                            new Uint8Array(post.image.data.data)
+                            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                        );
+                        let img = `data:;base64,${base64}`;
                         if(post.userid===id){
                                                                                   
                                return(                
                                 <div className="card-header" key={index}>                                
                                     <div className="card-list">
-                                        <div className="card-item">
-                                            <div className="card-image">
-                                                <img src={`https://server-7n65.onrender.com/${img}`} alt="logo" style={{height:"50px",width:"10%",borderRadius:"5px"}} />
+                                        <div className="card-item single-card-link" onClick={(e)=>{
+                                            e.preventDefault();
+                                            dispatch(allActions.set_postId(post._id));
+                                            localStorage.setItem("postId",post._id);
+                                            window.location.href = "/singlepost/"+post._id;
+                                                
+                                                
+                                            }}>
+                                            <div className="card-image" >
+                                                <img src={img} alt="logo" style={{height:"50px",width:"50px",borderRadius:"5px"}} />
                                                 <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>{post.title}</span>
                                             </div>
                                         </div>        
@@ -191,7 +215,7 @@ export default function Settings() {
                     </div>    
 
 
-                    <div className="card col-lg-12 col-md-12 col-xs-12">
+                    <div className="card col-lg-12 col-md-12 col-xs-12 card-password">
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}}>Change Password</label>
                         <div className="card-header">
                             
@@ -238,38 +262,26 @@ export default function Settings() {
                     </div>
                 </div>    
             </div>  
-            <div className="col-lg-3 col-md-2col-xs-12">
-                <div className="card">
+            <div className="col-lg-3 col-md-3 col-sm-8 col-xs-12">
+                <div className="card card-people-you-know">
                     <span style={{color:"orange",fontSize:"15px",fontWeight:"600"}}>People You may Know</span>
                     <br/>
                     {
-                        users.map((user,index)=>{
+                       allUser.map((users,index)=>{
+                            // let base64 = btoa(
+                            //     new Uint8Array(user.image.data.data)
+                            //     .reduce((data, byte) => data + String.fromCharCode(byte), '')
+                            // );
+                            // let img = `data:;base64,${base64}`;
+                            
                             return(
-                                <div className="card-header" key={index}>
-                                    <img src={user.image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"5px"}} />
-                                    <span >{user.username}</span>
-                                    <br/>
-                                    <button className='btn btn-follow' onClick={()=>{
-                                        
-                                        if (document.querySelector(".btn-follow").style.backgroundColor==="green"){
-                                            setFollowText("+ Follow")
-                                            document.querySelector(".btn-follow").style.backgroundColor="white"
-                                            document.querySelector(".btn-follow").style.color="black"
-                                            
-                                        }
-                                        else{
-                                            setFollowText("Following")
-                                            document.querySelector(".btn-follow").style.backgroundColor="green"
-                                            document.querySelector(".btn-follow").style.color="white"
-                                        }
-                                    }}> {followText}</button>
-
-                                </div>
+                                <Cardheader users={users} key={index} />
                             )
                         })
                     }
-
-                    <button className='btn btn-info' style={{width:"150px"}}>Follow More</button>
+                    <center>
+                    <button className='btn btn-info text-center mb-2' style={{width:"150px"}}>Follow More</button>
+                    </center>
                 </div>    
             </div>                 
 

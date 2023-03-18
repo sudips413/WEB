@@ -1,9 +1,10 @@
 import setAllPosts from './postActions';
 import userActions from './userActions';
-import get_user from './userList';
+import getAllUsers from './userList';
+import set_postId from './currentPostID';
 
 const allActions = {
-    userActions,setAllPosts,get_user
+    userActions,setAllPosts,getAllUsers, set_postId
 }
 
 
