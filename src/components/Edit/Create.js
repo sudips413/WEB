@@ -54,6 +54,7 @@ export default function Create() {
                                 setwait(false);
                                 },500);
                                 document.getElementById("myform").reset();
+                                window.location.href="/";
                                                              
                             }
                             else{
