@@ -65,7 +65,7 @@ export default function Login() {
                 document.getElementById("error").innerHTML = "User Doesnt Exist";
                 setTimeout(()=>{
                   seterror(false);
-                },1000);
+                },3000);
                 document.getElementById("logIn").style.display="none";
                 
               }
@@ -76,7 +76,7 @@ export default function Login() {
               document.getElementById("error").innerHTML =  "Credentials are wrong";
               setTimeout(()=>{
                 seterror(false);
-              },1000);
+              },5000);
               seterror(true);
 
 
