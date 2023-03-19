@@ -111,7 +111,7 @@ export default function Settings() {
                                     const data = new FormData();
                                     data.append("file",image);
                                     const id = window.localStorage.getItem("id");
-                                    axios.put(`http://localhost:4000/api/profile/${id}`,data)
+                                    axios.put(`https://blog-1pne.onrender.com/api/profile/${id}`,data)
                                     .then(res=>{
                                         window.location.reload();
                                         document.getElementById("error").innerHTML = "Profile Picture Updated";
