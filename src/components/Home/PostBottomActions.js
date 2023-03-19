@@ -115,7 +115,6 @@ function PostBottomActions({post,index}) {
                                     alert("Please enter a comment");
                                     return;
                                 }else{
-                                const postid = post._id;
                                 const userid = localStorage.getItem("id");
                                 const username = currentUser.currentUser.username;
                                 const image = currentUser.currentUser.image;
@@ -125,8 +124,9 @@ function PostBottomActions({post,index}) {
                                     userid: userid,
                                     image:image
                                 }
-                                await axios.put("https://blog-1pne.onrender.com/api/comment/"+postid,commentObj)
+                                await axios.put(`https://blog-1pne.onrender.com/api/comment/${post._id}`,commentObj)
                                 .then(res=>{
+                                    console.log(res.data);
                                     setshowNewComment(true);
                                     setnewComment(commentObj);
                                     setcomment("");
@@ -136,6 +136,7 @@ function PostBottomActions({post,index}) {
 
                                 })
                                 .catch(err=>{
+                                    console.log(err);
                                     document.getElementById(`btn-comment-${index}`).disabled=false;
                                     document.getElementById(`btn-comment-${index}`).cursor="allowed";
                                 })
