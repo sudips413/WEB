@@ -47,7 +47,7 @@ export default function Settings() {
         const id = window.localStorage.getItem("id");
         if(newpassword===confirmpassword){
             // http://localhost:4000
-            axios.put(`http://localhost:4000/api/changepassword/${id}`,
+            axios.put(`https://blog-1pne.onrender.com/api/changepassword/${id}`,
             {
                 oldpassword:oldpassword,
                 newpassword:newpassword
