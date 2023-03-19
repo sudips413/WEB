@@ -200,7 +200,6 @@ export default function Settings() {
                                                 <button className='view-btn' 
                                                 onClick={(e)=>{
                                                     e.preventDefault();
-                                                    dispatch(allActions.set_postId(post._id));
                                                     localStorage.setItem("postId",post._id);
                                                     window.location.href = "/singlepost/"+post._id;
                                                         

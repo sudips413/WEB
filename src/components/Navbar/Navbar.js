@@ -74,6 +74,7 @@ export default function Header() {
                     <Link className="nav-link" to="/login" onClick={(e)=>{
                         dispatch(allActions.userActions.logout());
                         localStorage.removeItem("id");
+                        localStorage.removeItem("postId");
                     }}><i className='fa fa-sign-out'>Logout</i></Link>
                     </li>
                     </>):(

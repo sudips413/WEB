@@ -56,7 +56,11 @@ function Home() {
                 <div className='card-description details'>
                     <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
                     <p className='card-content'>
-                        {post.description}
+                        {post.description} <a href={{}} onClick={(e)=>{
+                            e.preventDefault();
+                            localStorage.setItem("postId",post._id);
+                            window.location.href = "/singlepost/"+post._id;
+                        }} className='read-more'>Read More</a>
                     </p>    
                     <hr/>            
                     <div className="actions ">

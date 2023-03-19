@@ -1,15 +1,18 @@
-import React, { useEffect,useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Popup from '../popup/Popup';
 import Edit from '../popup/Edit';
 
 import "./singlepost.css";
+import PostBottomActions from '../Home/PostBottomActions';
+
 
 function SinglePost() {
     const [title,settitle] = useState("");
     const [popup,setpopup] = useState(false);
     const [postcontent,setpost] = useState([]);
     const [editpopup,seteditpopup] = useState(false);  
+    const id = localStorage.getItem("id");
     const postid = localStorage.getItem("postId");
     const posts = useSelector(state=>state.postReducer.posts);
     const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
@@ -19,16 +22,32 @@ function SinglePost() {
         <div className='col-lg-4 col-md-4 col-sm-8 col-xs-10'>
         <div className='card'>
             <div className='card-category'>
-                <h3>Categories</h3>
-                <div className='card-body'>
-                    <ul className='list'>
-                        <li className='list-group-item'>Health</li>
-                        <li className='list-group-item'>Education</li>
-                        <li className='list-group-item'>Football</li>
-                        <li className='list-group-item'>History</li>
-                        <li className='list-group-item'>Marketing</li>
-                    </ul>    
-                </div>
+                <span> {">>"}Home{">>"}singlepost</span>
+                <h3>Posts</h3>
+                {
+                    posts.map((post,index)=>{
+                        let base64 = btoa(
+                            new Uint8Array(post.image.data.data).reduce(
+                                (data, byte) => data + String.fromCharCode(byte),
+                                '',
+                            ),
+                        );
+                        let image = `data:${post.image.contentType};base64,${base64}`;
+                        return(
+                            <div className='list-post'>
+                                <img src={image} alt='post' className='post-image' height={50} width={50}/>
+                                <a href={{}} onClick={(e)=>{
+                                    e.preventDefault();
+                                    localStorage.setItem("postId",post._id);
+                                    window.location.reload();
+
+                                }}><h3 style={{color:"black",fontSize:"15px"}}>{post.title}</h3></a>
+                            </div>
+
+                        )
+                    })
+                }
+                
             </div>               
 
         </div>
@@ -60,6 +79,7 @@ function SinglePost() {
                             </div>    
                         </div>
                         <div>
+                        {id ?
                         <div className="actions ">
                             <><span onClick={(e)=>{
                                 e.preventDefault();
@@ -78,20 +98,12 @@ function SinglePost() {
                             <button className='bottom-action' ><i className="fa fa-edit" style={{color:"green"}}
                             /> Edit</button></span>
                             </>
-                    </div>
+                        </div>
+                        :null
+                        }
 
                         </div>
-                        <div className='post-comments'>
-                            <h3>Comments</h3>
-                            <div className='comment'>
-                                <div className='comment-user'>
-                                    <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' alt='user' className='comment-user-image'/>
-                                </div>
-                                <div className='comment-content'>
-                                    <p>Great post</p>
-                                </div>
-                            </div>    
-                        </div>   
+                        <PostBottomActions post={post} key={index}/>   
                         </>
                     )
                 })

@@ -1,17 +1,17 @@
 const initialState = {
-    id: '',
+    post: []
 }
 
-function currentPostIDReducer(state = initialState, action) {
+function singlePost(state = initialState, action) {
     switch(action.type){
-        case "SET_POST_ID":
+        case "SET_SINGLE_POST":
             return {
                 ...state,
-                id: action.payload
+                post: action.payload
             }
         default:
             return initialState;    
     }
 }
 
-export default currentPostIDReducer;
+export default singlePost;

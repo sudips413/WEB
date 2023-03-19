@@ -1,7 +1,9 @@
 const initialState = {
     posts: []
     };
-
+const singlepostinitialState = {
+    post: {}
+    };
 
 function postReducer(state = initialState, action) {
 

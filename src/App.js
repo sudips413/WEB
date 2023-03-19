@@ -39,6 +39,7 @@ function App() {
     const res = await axios.get("https://blog-1pne.onrender.com/api/posts");
     const posts = res.data;
     dispatch(allActions.setAllPosts.set_posts(posts));
+    
   }
 
   useEffect(() => {
@@ -67,7 +68,6 @@ function App() {
                 </>
                 )
               }
-              <Route path="/register" element={<Register />} />
               <Route path="/setting" element={<Settings />} />
               <Route path="/create" element={<Create />} />
               <Route path ="/singlepost/:id" element={<SinglePost/>} />
