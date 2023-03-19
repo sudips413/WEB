@@ -64,7 +64,7 @@ function Home() {
                             navigate(`/singlepost/${post._id}`);
                             axios.put(`https://blog-1pne.onrender.com/api/post/increaseview/${post._id}`)
                             .then(res=>{
-                                return null
+                                console.log(res.data);
                             })
                             
                         }} className='read-more'>Read More</a>

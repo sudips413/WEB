@@ -100,9 +100,12 @@ function PostBottomActions({post,index}) {
 
                         }}required/>
                         <br/>
-                        <button className='btn btn-show-comment btn-primary' onClick={async (e)=>{
+                        <button className='btn btn-show-comment btn-primary' id={`btn-comment-${index}`} onClick={async (e)=>{
                             e.preventDefault();
-                            let id= localStorage.getItem("id");
+                            document.getElementById(`btn-comment-${index}`).disabled=true;
+                            document.getElementById(`btn-comment-${index}`).cursor="not-allowed";
+
+                           let id= localStorage.getItem("id");
                             if(!id){
                                 alert("Please login first");
                                 return;
@@ -127,10 +130,14 @@ function PostBottomActions({post,index}) {
                                     setshowNewComment(true);
                                     setnewComment(commentObj);
                                     setcomment("");
+                                    document.getElementById(`btn-comment-${index}`).disabled=false;
+                                    document.getElementById(`btn-comment-${index}`).cursor="allowed";
 
 
                                 })
                                 .catch(err=>{
+                                    document.getElementById(`btn-comment-${index}`).disabled=false;
+                                    document.getElementById(`btn-comment-${index}`).cursor="allowed";
                                 })
 
                             }
