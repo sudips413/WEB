@@ -187,4 +187,17 @@ span>.bottom-action:hover{
       transform: rotate(360deg);
     }
   }
+
+  .btn-show-comment{
+    background-color: rgb(13, 13, 13);
+    color: aliceblue;
+    margin:10px auto;
+    border-radius: 5px;
+  }
+  .bottom-action-like{
+    color: rgb(65, 2, 76);
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
   

@@ -8,6 +8,7 @@ import { useSelector,useDispatch} from 'react-redux';
 import Popup from '../popup/Popup';
 import Edit from '../popup/Edit';
 import allActions from '../../actions';
+import PostBottomActions from './PostBottomActions';
 function Home() {
   const [title,settitle] = useState("");
   const [popup,setpopup] = useState(false);
@@ -16,7 +17,6 @@ function Home() {
   const [editpopup,seteditpopup] = useState(false); 
   const dispatch = useDispatch();
   const id = localStorage.getItem("id");
-  
     const fetchposts = async()=>{
     if (!id){ 
         dispatch(allActions.userActions.set_loading_status(true));      
@@ -90,6 +90,7 @@ function Home() {
                         }
                         <span className='bottom-action'><i className="fa fa-clock-o"/> {new Date(post.date).toDateString()}</span>
                     </div>
+                    <PostBottomActions post={post} key={index}/>
                     <hr/> 
                 </div>
             </div>  
