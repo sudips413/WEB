@@ -13,8 +13,10 @@ export default function Login() {
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
     const regStatus = useSelector(state=>state.registrationStatusReducer.registrationStatus);
-    const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
-    console.log(regStatus);
+    const id = localStorage.getItem("id");
+    if(id){
+        navigate("/");
+    }
     
 
 
@@ -27,6 +29,7 @@ export default function Login() {
       {regStatus && <div className="alert alert-success" role="alert"><i className='fa fa-check'> </i> Registration Success, Please Login</div>}
         <form className="form col-12" onSubmit={async (e)=>{
           e.preventDefault();
+          document.getElementById("registerLoading").style.display="block";
           
           if(email && password){
             dispatch(allActions.userActions.set_loading_status(true));
@@ -81,6 +84,8 @@ export default function Login() {
 
 
             })
+          document.getElementById("registerLoading").style.display="block";
+
         }
         else
         {
@@ -123,7 +128,7 @@ export default function Login() {
           <br/>
           <button type='submit' className='btn btn-primary'>Login</button>
           <span id="logIn" style={{color:"green",display:"none"}}>Loggin in ...</span>
-          {isLoading? <center><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
+          <center><div class="lds-roller mt-5" id="registerLoading" style={{display:"none"}}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>
           {error && <p id="error"></p>}
          
         </form>

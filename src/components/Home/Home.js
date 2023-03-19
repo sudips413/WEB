@@ -23,15 +23,11 @@ function Home() {
         await axios.get("https://blog-1pne.onrender.com/api/posts")   
         .then(res=>{
           
-        dispatch(allActions.setAllPosts.set_posts(res.data)); 
-
-           
+        dispatch(allActions.setAllPosts.set_posts(res.data));            
       }
       )
     }
     }
-
-
   useEffect(()=>{
     
     fetchposts();

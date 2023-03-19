@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import { useDispatch,useSelector} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import allActions from '../../actions';
+
 
 
 function Register() {
@@ -11,7 +12,10 @@ function Register() {
     const[password, setpassword]=useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
+    const id = localStorage.getItem("id");
+    if(id){
+        navigate("/");
+    }
   return (
     
     <div className='container'>
@@ -19,7 +23,7 @@ function Register() {
         {/* <div className="logo text-center">
             <img src="https://cdn.pixabay.com/photo/2012/05/07/18/57/blog-49006_960_720.png" alt="logo" style={{width:"40%"}} />
         </div> */}
-        <center><div class="lds-roller mt-5" id="registerLoading"style={{display:"none"}}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>
+        <center><div class="lds-roller mt-5" id="registerLoading" style={{display:"none"}}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>
       
         <form className="form col-12" onSubmit={async (e)=>{
             e.preventDefault();
