@@ -12,10 +12,6 @@ function Register() {
     const[password, setpassword]=useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const id = localStorage.getItem("id");
-    if(id){
-        navigate("/");
-    }
   return (
     
     <div className='container'>

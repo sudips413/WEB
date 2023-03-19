@@ -13,14 +13,6 @@ export default function Login() {
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
     const regStatus = useSelector(state=>state.registrationStatusReducer.registrationStatus);
-    const id = localStorage.getItem("id");
-    if(id){
-        navigate("/");
-    }
-    
-
-
-    
   return (
     <>
     

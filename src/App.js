@@ -44,9 +44,7 @@ function App() {
   useEffect(() => {
     dispatch(allActions.userActions.set_loading_status(true));     
     fetchFromId();
-  }, []);
-
-  
+  }, []); 
 
   return (
     <>
@@ -56,7 +54,19 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
+              {
+                id ? (
+                  <>
+                  <Route path="/login" element={<Home/>} />
+                  <Route path="/register" element={<Home/>} />
+                  </>
+                ):
+                (<>
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                </>
+                )
+              }
               <Route path="/register" element={<Register />} />
               <Route path="/setting" element={<Settings />} />
               <Route path="/create" element={<Create />} />
