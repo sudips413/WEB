@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import Popup from '../popup/Popup';
 import Edit from '../popup/Edit';
-
+import axios from 'axios';
 import "./singlepost.css";
 import PostBottomActions from '../Home/PostBottomActions';
 
@@ -16,14 +17,29 @@ function SinglePost() {
     const postid = localStorage.getItem("postId");
     const posts = useSelector(state=>state.postReducer.posts);
     const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus);
+    const navigate = useNavigate();
+    function Name(){
+        if(posts){
+            try{
+            const currentPostName = posts.filter(post=>post._id === postid)[0].title;
+            return currentPostName;
+            }
+            catch(err){
+                return null;
+            }
+        }
+    }
   return (    
     <div className='container'>
     <div className='row mt-5'>
         <div className='col-lg-4 col-md-4 col-sm-8 col-xs-10'>
         <div className='card'>
             <div className='card-category'>
-                <span> {">>"}Home{">>"}singlepost</span>
-                <h3>Posts</h3>
+                <span style={
+                    {color:"blue",fontSize:"15px",cursor:"pointer"}
+                }><h5 onClick={()=>{
+                    navigate("/");
+                }}>Home</h5>singlepost{" >>"}{Name()}</span>
                 {
                     posts.map((post,index)=>{
                         let base64 = btoa(
@@ -34,12 +50,15 @@ function SinglePost() {
                         );
                         let image = `data:${post.image.contentType};base64,${base64}`;
                         return(
-                            <div className='list-post'>
+                            <div className='list-post' key={index}>
                                 <img src={image} alt='post' className='post-image' height={50} width={50}/>
                                 <a href={{}} onClick={(e)=>{
                                     e.preventDefault();
                                     localStorage.setItem("postId",post._id);
                                     window.location.reload();
+                                    axios.put(`https://blog-1pne.onrender.com/api/post/increaselike/${post._id}`).then((res)=>{
+                                        return null
+                                    })
 
                                 }}><h3 style={{color:"black",fontSize:"15px"}}>{post.title}</h3></a>
                             </div>
@@ -63,8 +82,7 @@ function SinglePost() {
                                 '',
                             ),
                         );
-                        let image = `data:${post.image.contentType};base64,${base64}`;
-                    
+                        let image = `data:${post.image.contentType};base64,${base64}`;                    
                     return(
                         post._id === postid && <>
                         <div className='post' key={index}>
@@ -79,7 +97,7 @@ function SinglePost() {
                             </div>    
                         </div>
                         <div>
-                        {id ?
+                        {id === post.userid?
                         <div className="actions ">
                             <><span onClick={(e)=>{
                                 e.preventDefault();

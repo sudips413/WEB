@@ -35,7 +35,7 @@ function App() {
       };
       dispatch(allActions.userActions.set_user(obj));
     }
-    
+    dispatch(allActions.userActions.set_loading_status(true));
     const res = await axios.get("https://blog-1pne.onrender.com/api/posts");
     const posts = res.data;
     dispatch(allActions.setAllPosts.set_posts(posts));

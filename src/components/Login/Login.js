@@ -24,7 +24,6 @@ export default function Login() {
           document.getElementById("registerLoading").style.display="block";
           
           if(email && password){
-            dispatch(allActions.userActions.set_loading_status(true));
             document.getElementById("logIn").style.display="block";
             await axios.post("https://blog-1pne.onrender.com/api/login",{
               email:email,
@@ -56,7 +55,6 @@ export default function Login() {
                 
               }
               else{
-
                 document.getElementById("error").innerHTML = "User Doesnt Exist";
                 setTimeout(()=>{
                   seterror(false);
@@ -76,20 +74,21 @@ export default function Login() {
 
 
             })
-          document.getElementById("registerLoading").style.display="block";
 
-        }
-        else
-        {
-          document.getElementById("error").innerHTML = "Please fill all the fields correctly";
-          setTimeout(()=>{
-            seterror(false);
-          },500);
-          seterror(true);
-        }
-        dispatch(allActions.userActions.set_loading_status(false));
+
+          }
+          else
+          { 
             
-        }}>
+            document.getElementById("error").innerHTML = "Please fill all the fields correctly";
+            setTimeout(()=>{
+              seterror(false);
+            },500);
+            seterror(true);
+          }
+          document.getElementById("registerLoading").style.display="none";
+            
+          }}>
           <h2>SIGN IN</h2>
 
           <input type='text' className='form-control'  id="mail" placeholder="Email"

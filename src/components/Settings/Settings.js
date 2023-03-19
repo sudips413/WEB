@@ -46,8 +46,8 @@ export default function Settings() {
         
         const id = window.localStorage.getItem("id");
         if(newpassword===confirmpassword){
-            // https://blog-1pne.onrender.com
-            axios.put(`https://blog-1pne.onrender.com/api/changepassword/${id}`,
+            // http://localhost:4000
+            axios.put(`http://localhost:4000/api/changepassword/${id}`,
             {
                 oldpassword:oldpassword,
                 newpassword:newpassword
@@ -111,7 +111,7 @@ export default function Settings() {
                                     const data = new FormData();
                                     data.append("file",image);
                                     const id = window.localStorage.getItem("id");
-                                    axios.put(`https://blog-1pne.onrender.com/api/profile/${id}`,data)
+                                    axios.put(`http://localhost:4000/api/profile/${id}`,data)
                                     .then(res=>{
                                         window.location.reload();
                                         document.getElementById("error").innerHTML = "Profile Picture Updated";
@@ -201,7 +201,8 @@ export default function Settings() {
                                                 onClick={(e)=>{
                                                     e.preventDefault();
                                                     localStorage.setItem("postId",post._id);
-                                                    window.location.href = "/singlepost/"+post._id;
+                                                    // window.location.href = "/singlepost/"+post._id;
+                                                    navigate(`/singlepost/${post._id}`);
                                                         
                                                         
                                                     }}>view <i className='fa fa-eye'></i></button>
