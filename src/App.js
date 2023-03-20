@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import axios from "axios";
+
 import { useDispatch } from "react-redux";
 import allActions from "./actions";
 import './App.css';
@@ -16,6 +16,7 @@ import Settings from "./components/Settings/Settings";
 import Create from "./components/Edit/Create";
 import Footer from "./components/Footer/Footer";
 import SinglePost from "./components/SinglePost/SinglePost";
+import axios from "axios";
 
 
 function App() {

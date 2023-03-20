@@ -97,10 +97,11 @@ export default function Settings() {
                         <input type="file" name="file" id="file" className="inputfile" accept='.jpg,.png' style={{display:"none"}} onChange={(e)=>{
                             setimage(e.target.files[0])
                         }}/>
-                        {currentUser.image.data.data !==[]?
+                        {currentUser.image.data.data !==[] || currentUser.image.data.data !==""?
                         <label htmlFor="file" id="file" ><img src={img} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
                         (<label htmlFor="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
                         }
+                        
                         <br/>
                         <span style={{fontSize:"18px",fontWeight:"600"}}>{currentUser.username}</span>
                         <br/>

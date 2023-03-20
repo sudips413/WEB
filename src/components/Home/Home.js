@@ -38,7 +38,7 @@ function Home() {
   return (
     
     <div className='container container-width'>
-        {isLoading? <center><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
+        {isLoading? <center style={{marginTop:"20%",color:"red"}}><span color={"red"}>Loading Might take more than 5sec...</span><br/><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
         { posts? posts.map((post,index)=>{
             // dispatch(allActions.add_comment(post.comment))
 
