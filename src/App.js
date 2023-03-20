@@ -68,6 +68,8 @@ function App() {
                 </>
                 )
               }
+              <Route path="/login" element={<Login />} />
+              
               <Route path="/setting" element={<Settings />} />
               <Route path="/create" element={<Create />} />
               <Route path ="/singlepost/:id" element={<SinglePost/>} />
