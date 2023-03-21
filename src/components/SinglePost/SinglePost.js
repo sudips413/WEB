@@ -42,21 +42,14 @@ function SinglePost() {
                 }}>Home</h5>singlepost{" >>"}{Name()}</span>
                 {
                     posts.map((post,index)=>{
-                        let base64 = btoa(
-                            new Uint8Array(post.image.data.data).reduce(
-                                (data, byte) => data + String.fromCharCode(byte),
-                                '',
-                            ),
-                        );
-                        let image = `data:${post.image.contentType};base64,${base64}`;
                         return(
                             <div className='list-post' key={index}>
-                                <img src={image} alt='post' className='post-image' height={50} width={50}/>
+                                <img src={post.image} alt='post' className='post-image' height={50} width={50}/>
                                 <a href={{}} onClick={(e)=>{
                                     e.preventDefault();
                                     localStorage.setItem("postId",post._id);
                                     window.location.reload();
-                                    axios.put(`https://blog-1pne.onrender.com/api/post/increaselike/${post._id}`).then((res)=>{
+                                    axios.put(`http://localhost:4000/api/post/increaselike/${post._id}`).then((res)=>{
                                         return null
                                     })
 
@@ -74,20 +67,12 @@ function SinglePost() {
         <div className='col-lg-8 col-md-8 col-sm-8 col-xs-10'>
         {isLoading? <center><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
             { 
-                posts.map((post,index)=>{
-                    // if (postid === post._id){
-                        let base64 = btoa(
-                            new Uint8Array(post.image.data.data).reduce(
-                                (data, byte) => data + String.fromCharCode(byte),
-                                '',
-                            ),
-                        );
-                        let image = `data:${post.image.contentType};base64,${base64}`;                    
+                posts.map((post,index)=>{                  
                     return(
                         post._id === postid && <>
                         <div className='post' key={index}>
                             <div className='post-image'>
-                                <img src={image} alt='post' className='post-image'/>
+                                <img src={post.image} alt='post' className='post-image'/>
                             </div>
                             <div className='post-title'>
                                 <h3>{post.title}</h3>

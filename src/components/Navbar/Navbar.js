@@ -13,17 +13,8 @@ export default function Header() {
     // const [userdetail,setuserdetail]=useState([]);    
   
     const currentUser = useSelector(state => state.userReducer);
+    const posts = useSelector(state=>state.postReducer.posts); 
     let image = currentUser.currentUser.image;
-   
-    if(image){
-        const image64 = btoa(
-            new Uint8Array(image.data.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                '',
-            ),
-        );
-        image = `data:${image.contentType};base64,${image64}`;
-    }
   return (
     <>
     <header>
@@ -33,7 +24,7 @@ export default function Header() {
             <div className="container-fluid ">
             {currentUser.currentUser.loginStatus? 
             (<Link to="/setting" className="navbar-brand fw-bold d-flex">
-                {currentUser.currentUser.image.data.data !== []?
+                {currentUser.currentUser.image !== ""?
 
                 (
                 <div className='circular-image'>
@@ -56,6 +47,7 @@ export default function Header() {
                 } else {
                     listsElement.style.display = "block";
                 }
+                document.getElementById("navbar-closer").style.display = "block";
 
             }}><i class="fa fa-bars"></i></button>
             <ul className="navbar-nav ms-auto" id="lists">
@@ -71,11 +63,12 @@ export default function Header() {
                     <Link className='nav-link' to="/setting"><i className='fa fa-cog'>Setting</i></Link>
                     </li>
                     <li className="nav-item">
-                    <Link className="nav-link" to="/login" onClick={(e)=>{
+                    <Link className="nav-link sign-out" to="/login" onClick={(e)=>{
                         dispatch(allActions.userActions.logout());
                         localStorage.removeItem("id");
                         localStorage.removeItem("postId");
-                    }}><i className='fa fa-sign-out'>Logout</i></Link>
+                        dispatch(allActions.setAllPosts.set_posts(posts));
+                    }}><i className='fa fa-sign-out' style={{fontSize:"20px"}}></i></Link> 
                     </li>
                     </>):(
                         <>
@@ -91,6 +84,16 @@ export default function Header() {
                         </>
 
                     )}
+                    <button className="btn btn-info mb-2" id="navbar-closer" onClick={()=>{
+                        // if the width of screen is max of 850px 
+                        // then the navbar will be closed
+                        if(window.innerWidth <= 850){
+                        document.getElementById("lists").style.display = "none";
+                        document.getElementById("navbar-closer").style.display = "none";
+                        }
+                    }
+                    } style={{display:"none"}}>close</button>
+                    
                 
             </ul>
             </div>            

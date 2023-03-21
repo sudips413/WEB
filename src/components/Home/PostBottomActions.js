@@ -35,17 +35,6 @@ function PostBottomActions({post,index}) {
     const currentUser = useSelector(state => state.userReducer);
     const [showNewComment,setshowNewComment] = React.useState(false);
     const [newComment,setnewComment] = React.useState("");
-
-    function converttoimage(post){
-        let base64 = btoa(
-            new Uint8Array(post.image.data.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                '',
-            ),
-        );
-        let image = `data:${post.image.contentType};base64,${base64}`;
-        return image;
-    }
   return (
     <div className='container' >
         <div className='row'>
@@ -62,18 +51,11 @@ function PostBottomActions({post,index}) {
                 <div class="comment">
                     { 
                     post.comment.map((comment,index)=>{
-                    let base64 =btoa(
-                        new Uint8Array(comment.image.data.data).reduce(
-                            (data, byte) => data + String.fromCharCode(byte),
-                            '',
-                        ),
-                    );
-                    let image = `data:${comment.image.contentType};base64,${base64}`;
                         return(
                             comment.username === "" ? null:
                             <>
                                 <div class="comment-author" key={index}>
-                                    <img src={image} style={{height:"40px",width:"40px",borderRadius:"50%"}} alt="avatar" />
+                                    <img src={comment.image} style={{height:"40px",width:"40px",borderRadius:"50%"}} alt="avatar" />
                                     <span class="comment-author-name">{comment.username}</span>
                                 </div>
                                 <div className='comment-content'>
@@ -86,7 +68,7 @@ function PostBottomActions({post,index}) {
                     }
                     {showNewComment? <>
                     <div class="comment-author" key={index}>
-                        <img src={converttoimage(newComment)} style={{height:"40px",width:"40px",borderRadius:"50%"}} alt="avatar" />
+                        <img src={newComment.image} style={{height:"40px",width:"40px",borderRadius:"50%"}} alt="avatar" />
                         <span class="comment-author-name">{newComment.username}</span>
                     </div>
                     <div className='comment-content'>
@@ -126,7 +108,6 @@ function PostBottomActions({post,index}) {
                                 }
                                 await axios.put(`https://blog-1pne.onrender.com/api/comment/${post._id}`,commentObj)
                                 .then(res=>{
-                                    console.log(res.data);
                                     setshowNewComment(true);
                                     setnewComment(commentObj);
                                     setcomment("");

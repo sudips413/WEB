@@ -40,20 +40,12 @@ function Home() {
     <div className='container container-width'>
         {isLoading? <center style={{marginTop:"20%",color:"red"}}><span color={"red"}>Loading Might take more than 5sec...</span><br/><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
         { posts? posts.map((post,index)=>{
-            // dispatch(allActions.add_comment(post.comment))
-
-            let base64 = btoa(
-                new Uint8Array(post.image.data.data).reduce(
-                    (data, byte) => data + String.fromCharCode(byte),
-                    '',
-                ),
-            );
-            let image = `data:${post.image.contentType};base64,${base64}`;
+            // dispatch(allActions.add_comment(post.comment));
             return(
             <div className='card-body col-12 mt-5' key={index} >
                 <div className='card-image text-center mb-2'>
                     
-                    <img src={image}  className="PostImage mx-auto" alt="logo"/>
+                    <img src={post.image}  className="PostImage mx-auto" alt="logo"/>
                 </div>
                 <div className='card-description details'>
                     <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
@@ -64,7 +56,9 @@ function Home() {
                             navigate(`/singlepost/${post._id}`);
                             axios.put(`https://blog-1pne.onrender.com/api/post/increaseview/${post._id}`)
                             .then(res=>{
-                                console.log(res.data);
+                            })
+                            .catch(err=>{
+            
                             })
                             
                         }} className='read-more'>Read More</a>

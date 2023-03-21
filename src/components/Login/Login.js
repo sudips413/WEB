@@ -32,15 +32,21 @@ export default function Login() {
             })
             .then((res)=>{
               if(res.data.success){
+
                 const obj ={
                   username:res.data.user.name,
                   email:res.data.user.email,
                   id:res.data.user._id,
                   image:res.data.user.image,
                   loginStatus:true,
+                  other: res.data.others,
+                  followings: res.data.user.followings,
+                  followers: res.data.user.followers,
                   // set id in local storage                 
 
                 }
+      
+                document.getElementById("registerLoading").style.display="none";
                 localStorage.setItem("id",res.data.user._id);
                 dispatch(allActions.userActions.set_registration_status(false));
                 dispatch(allActions.userActions.set_user(obj));
@@ -55,6 +61,7 @@ export default function Login() {
                 
               }
               else{
+                document.getElementById("registerLoading").style.display="none";
                 document.getElementById("error").innerHTML = "User Doesnt Exist";
                 setTimeout(()=>{
                   seterror(false);
@@ -65,6 +72,7 @@ export default function Login() {
             }
             )
             .catch((err)=>{
+              document.getElementById("registerLoading").style.display="none";
               document.getElementById("logIn").style.display="none";
               document.getElementById("error").innerHTML =  "Credentials are wrong";
               setTimeout(()=>{
@@ -86,7 +94,7 @@ export default function Login() {
             },500);
             seterror(true);
           }
-          document.getElementById("registerLoading").style.display="none";
+          
             
           }}>
           <h2>SIGN IN</h2>

@@ -4,11 +4,10 @@ const initialState = {
       username: '',
       email : '',
       id:'',
-      image:{
-        data: '',
-        contentType: ''
-
-      },
+      image:'',
+      followings:'',
+      followers:'',
+      other:[],
       loginStatus: false
     }
   };
@@ -24,6 +23,9 @@ const initialState = {
             email: action.payload.email,
             id: action.payload.id,
             image: action.payload.image,
+            other: action.payload.other,
+            followers: action.payload.followers,
+            followings: action.payload.followings,
 
             loginStatus: true
           }

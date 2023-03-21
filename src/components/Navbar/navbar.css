@@ -44,6 +44,9 @@ li{
     .blogtitle{
         display: none;
     }
+    .navbar-closer{
+        display: block;
+    }
     .displayMenu{
         display: block;
     }
@@ -95,3 +98,8 @@ li{
     width: 100%;
     height: auto;
   }
+
+.fa-close{
+    color: white;
+    font-size: 20px;
+}

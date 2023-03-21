@@ -26,18 +26,6 @@ export default function Settings() {
     const id = window.localStorage.getItem("id");
     const currentUser = useSelector(state => state.userReducer.currentUser);
     const posts = useSelector(state => state.postReducer.posts)
-    let img = '';
-
-    if (currentUser.image) {
-        
-        const image64 = btoa(
-            new Uint8Array(currentUser.image.data.data).reduce(
-                (data, byte) => data + String.fromCharCode(byte),
-                '',
-            ),
-        );
-        img = `data:${currentUser.image.contentType};base64,${image64}`;
-    }
     //fetch all the users
     
     const [image,setimage]=useState([])
@@ -46,7 +34,7 @@ export default function Settings() {
         
         const id = window.localStorage.getItem("id");
         if(newpassword===confirmpassword){
-            // http://localhost:4000
+            // https://blog-1pne.onrender.com
             axios.put(`https://blog-1pne.onrender.com/api/changepassword/${id}`,
             {
                 oldpassword:oldpassword,
@@ -83,8 +71,12 @@ export default function Settings() {
         return count;
     }
     
-       
-    const allUser = useSelector(state => state.userAllReducer.users); 
+
+    const allUser = currentUser.other;
+    console.log(allUser)
+
+
+ 
   return (
     <>
     
@@ -97,8 +89,8 @@ export default function Settings() {
                         <input type="file" name="file" id="file" className="inputfile" accept='.jpg,.png' style={{display:"none"}} onChange={(e)=>{
                             setimage(e.target.files[0])
                         }}/>
-                        {currentUser.image.data.data !==[] || currentUser.image.data.data !==""?
-                        <label htmlFor="file" id="file" ><img src={img} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
+                        {currentUser.image!==""?
+                        <label htmlFor="file" id="file" ><img src={currentUser.image} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>:
                         (<label htmlFor="file" id="file" ><img src={logo} style={{borderRadius:"50%", height:"100px"}} alt="logo" /></label>)
                         }
                         
@@ -136,11 +128,11 @@ export default function Settings() {
                         <div className='row' style={{display:"flex",justifyContent:"space-around",marginTop:"20px"}}>
                             <div className='col-lg-4 col-md-4 col-xs-4'>
                                 <label>Followers</label>
-                                <h5>0</h5>
+                                <h5>{currentUser.followers.length}</h5>
                             </div>
                             <div className='col-lg-4 col-md-4 col-xs-4'>
                                 <label>Following</label>
-                                <h5>0</h5>
+                                <h5>{currentUser.followings.length}</h5>
                             </div>
                             <div className='col-lg-4 col-md-4 col-xs-4'>
                                 <label>Posts</label>
@@ -177,18 +169,60 @@ export default function Settings() {
                 <div className="row card-content-password">
                     <div className="card col-lg-12 col-md-12 col-xs-12 card-content"> 
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Followers</label> 
-                    <span> You dont have Followers.</span>                    
+                    {
+                        currentUser.followers.length>=1 ?(
+                            currentUser.followers.map((user,index)=>{
+                                // check if user id exists in the allUser array
+                                function followerFinder(){
+                                    for(let i=0;i<allUser.length;i++){
+                                        if(allUser[i]._id === user){
+                                            return allUser[i];
+                                        }
+                                    }
+                                }  
+                                return(
+                                     <div className="card-header" key={index}>
+                                        <img src={followerFinder().image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"50%"}} />
+                                        <span>{followerFinder().name}</span>
+
+                                    </div>
+                                
+                                )
+                            })
+                        ):(
+                            <span> You dont have Followers.</span>
+                        )
+                    }                   
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Following</label> 
-                    <span> You dont have Followers.</span>
+                    {
+                        currentUser.followings.length>=1 ?(
+
+                            currentUser.followings.map((user,index)=>{
+                                // check if user id exists in the allUser array
+                                function FollowingFinder(){
+                                    for(let i=0;i<allUser.length;i++){
+                                        if(allUser[i]._id === user){
+                                            return allUser[i];
+                                        }
+                                    }
+                                }
+                                 
+                                return(
+                                     <div className="card-header" key={index}>
+                                        <img src={FollowingFinder().image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"50%"}} />
+                                        <span>{FollowingFinder().name}</span>
+
+                                    </div>
+                                )
+                            })
+                        ):(
+                            <span> You dont have follwings.</span>
+                        )
+                    }
                     <br/>
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Posts</label>
                     {countPosts()>=1 ?( 
                     posts.map((post,index)=>{
-                        let base64 = btoa(
-                            new Uint8Array(post.image.data.data)
-                            .reduce((data, byte) => data + String.fromCharCode(byte), '')
-                        );
-                        let img = `data:;base64,${base64}`;
                         if(post.userid===id){
                                                                                   
                                return(                
@@ -196,8 +230,8 @@ export default function Settings() {
                                     <div className="card-list text-center">
                                         <div className="card-item single-card-link" >
                                             <div className="card-image card-post-info" >
-                                                <img src={img} alt="logo" style={{height:"100px",width:"100px",borderRadius:"5px",padding:"10px"}} />
-                                                <span style={{fontFamily:"monospace",color:"purple",fontSize:"16px"}}>{post.title}</span>
+                                                <img src={post.image} alt="logo" style={{height:"120px",width:"150px",borderRadius:"5px",padding:"10px"}} />
+                                                <span style={{fontFamily:"monospace",color:"white",fontSize:"16px"}}>{post.title}</span>
                                                 <button className='view-btn' 
                                                 onClick={(e)=>{
                                                     e.preventDefault();
@@ -272,18 +306,16 @@ export default function Settings() {
                 <div className="card card-people-you-know">
                     <span style={{color:"orange",fontSize:"15px",fontWeight:"600"}}>People You may Know</span>
                     <br/>
-                    {
+                    { 
+                     allUser === [] || allUser === "undefined"? (<span> No Users Found</span>):
+                     (
                        allUser.map((users,index)=>{
-                            // let base64 = btoa(
-                            //     new Uint8Array(user.image.data.data)
-                            //     .reduce((data, byte) => data + String.fromCharCode(byte), '')
-                            // );
-                            // let img = `data:;base64,${base64}`;
                             
                             return(
                                 <Cardheader users={users} key={index} />
                             )
                         })
+                     )
                     }
                     <center>
                     <button className='btn btn-info text-center mb-2' style={{width:"150px"}}>Follow More</button>

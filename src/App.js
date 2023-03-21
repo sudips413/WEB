@@ -33,13 +33,19 @@ function App() {
         email: user.email,
         id: user._id,
         image: user.image,
+        other: res.data.others,
+        followings: user.followings,
+        followers: user.followers,
       };
       dispatch(allActions.userActions.set_user(obj));
+      
     }
     dispatch(allActions.userActions.set_loading_status(true));
     const res = await axios.get("https://blog-1pne.onrender.com/api/posts");
     const posts = res.data;
     dispatch(allActions.setAllPosts.set_posts(posts));
+    
+
     
   }
 
@@ -56,7 +62,7 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              {
+              {/* {
                 id ? (
                   <>
                   <Route path="/login" element={<Home/>} />
@@ -68,7 +74,8 @@ function App() {
                   <Route path="/register" element={<Register />} />
                 </>
                 )
-              }
+              } */}
+              <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               
               <Route path="/setting" element={<Settings />} />
