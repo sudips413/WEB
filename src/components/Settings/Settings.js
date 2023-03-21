@@ -100,7 +100,10 @@ export default function Settings() {
                         <button className="btn btn-info mt-3" onClick={
                             (e)=>{
                                 e.preventDefault();
+                                
                                 if(image.length !== 0){
+                                    document.getElementById("profile-upload").disabled=true;
+                                    document.getElementById("profile-upload").cursor = "not-allowed";
                                     const data = new FormData();
                                     data.append("file",image);
                                     const id = window.localStorage.getItem("id");
@@ -109,10 +112,14 @@ export default function Settings() {
                                         window.location.reload();
                                         document.getElementById("error").innerHTML = "Profile Picture Updated";
                                         setTimeout(()=>{document.getElementById("error").innerHTML = "";},2000)
+                                        document.getElementById("profile-upload").disabled=false;
+                                        document.getElementById("profile-upload").cursor = "allowed";
                                     }
                                     )
                                     .catch(err=>{
                                         document.getElementById("error").innerHTML = "profile picture not updated";
+                                        document.getElementById("profile-upload").disabled=false;
+                                        document.getElementById("profile-upload").cursor = "allowed";
                                     }
                                     )
                                 }
@@ -124,7 +131,7 @@ export default function Settings() {
                                     ,2000)
 
                                 }
-                        }}>Upload</button> 
+                        }} id="profile-upload">Upload</button> 
                         <div className='row' style={{display:"flex",justifyContent:"space-around",marginTop:"20px"}}>
                             <div className='col-lg-4 col-md-4 col-xs-4'>
                                 <label>Followers</label>
