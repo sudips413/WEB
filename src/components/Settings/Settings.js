@@ -73,7 +73,6 @@ export default function Settings() {
     
 
     const allUser = currentUser.other;
-    console.log(allUser)
 
 
  
@@ -109,7 +108,7 @@ export default function Settings() {
                                     const id = window.localStorage.getItem("id");
                                     axios.put(`https://blog-1pne.onrender.com/api/profile/${id}`,data)
                                     .then(res=>{
-                                        window.location.reload();
+                                        dispatch(allActions.userActions.set_image(res.data.userdata.image));
                                         document.getElementById("error").innerHTML = "Profile Picture Updated";
                                         setTimeout(()=>{document.getElementById("error").innerHTML = "";},2000)
                                         document.getElementById("profile-upload").disabled=false;
@@ -176,7 +175,7 @@ export default function Settings() {
                 <div className="row card-content-password">
                     <div className="card col-lg-12 col-md-12 col-xs-12 card-content"> 
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Followers</label> 
-                    {
+                    <div className='followers'>                    {
                         currentUser.followers.length>=1 ?(
                             currentUser.followers.map((user,index)=>{
                                 // check if user id exists in the allUser array
@@ -199,8 +198,10 @@ export default function Settings() {
                         ):(
                             <span> You dont have Followers.</span>
                         )
-                    }                   
+                    }  
+                    </div>                 
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Following</label> 
+                    <div className='following'>
                     {
                         currentUser.followings.length>=1 ?(
 
@@ -226,6 +227,7 @@ export default function Settings() {
                             <span> You dont have follwings.</span>
                         )
                     }
+                    </div>
                     <br/>
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Posts</label>
                     {countPosts()>=1 ?( 
@@ -302,7 +304,7 @@ export default function Settings() {
                                     }
 
                                 }}required />
-                                <button type='submit' className="btn btn-primary mt-2 mb-2 col-xs-8" style={{width:"40%"}}>Change Password</button>
+                                <button type='submit' className="btn btn-primary mt-1 mb-2 col-xs-8" style={{width:"40%"}}>Change Password</button>
                             </form> 
                             {wait && <p id="err" style={{color:"red"}}></p>}   
                         </div>
@@ -312,15 +314,20 @@ export default function Settings() {
             <div className="col-lg-3 col-md-3 col-sm-8 col-xs-12">
                 <div className="card card-people-you-know">
                     <span style={{color:"orange",fontSize:"15px",fontWeight:"600"}}>People You may Know</span>
-                    <br/>
                     { 
                      allUser === [] || allUser === "undefined"? (<span> No Users Found</span>):
                      (
                        allUser.map((users,index)=>{
+                        //display only fitst five users
+                        if(index<5){
                             
                             return(
+                                <div classname="following">
+
                                 <Cardheader users={users} key={index} />
+                                </div>
                             )
+                        }
                         })
                      )
                     }

@@ -36,8 +36,15 @@ const initialState = {
           currentUser: {
             ...state.currentUser,
             username: '',
-            password:' ',
             loginStatus: false
+          }
+        };
+      case 'SET_IMAGE':
+        return {
+          ...state,
+          currentUser: {
+            ...state.currentUser,
+            image: action.payload
           }
         };
       default:

@@ -99,3 +99,40 @@
     }
 }
 
+.following,.followers{
+    font-size: 15px;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: scroll;
+    border : 1px solid rgb(31, 11, 86);
+    border-radius: 10px 0px 0px 10px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ca183e;
+  }
+/* Internet Explorer */
+body {
+    -ms-overflow-style: scrollbar;
+  }
+  
+  /* Microsoft Edge */
+  body {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+  }
+  .btn-follow{
+    background-color: rgb(242, 249, 247);
+    color: rgb(80, 136, 200);
+    border: 1px solid rgb(80, 136, 200);
+    border-radius: 5px;
+
+  }

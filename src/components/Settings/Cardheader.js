@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios';
+import './settings.css'
 
 function Cardheader({users,index}) {
     const [isFollowing, setIsFollowing] = React.useState(false);
@@ -32,12 +33,12 @@ function Cardheader({users,index}) {
       <img
         src={users.image}
         alt="logo"
-        style={{ height: "50px", width: "60px", borderRadius: "5px" }}
+        style={{ height: "50px", width: "50px", borderRadius: "50%" }}
       />
       <span>{users.name}</span>
       <br />
       <button
-        className={`btn btn-follow-${index} mt-3 text-center`}
+        className={`btn btn-follow btn-follow-${index} mt-3 text-center`}
         onClick={handleFollowClick}
         style={{
           backgroundColor: isFollowing ? "green" : "white",

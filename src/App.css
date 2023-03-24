@@ -6,3 +6,6 @@
 .content-wrap {
     padding-bottom: 2.5rem;    /* Footer height */
   }
+img{
+  object-fit: cover;
+}

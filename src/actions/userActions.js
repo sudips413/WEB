@@ -23,10 +23,17 @@ const set_loading_status=(status)=>{
     }
 }
 
+const set_image = (image)=>{
+    return {
+        type:"SET_IMAGE",
+        payload: image
+    }
+}
+
 
 
 
 const userActions ={
-    set_user,logout,set_registration_status,set_loading_status
+    set_user,logout,set_registration_status,set_loading_status,set_image
 }
 export default userActions
