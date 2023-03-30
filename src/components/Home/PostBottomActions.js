@@ -39,11 +39,11 @@ function PostBottomActions({post,index}) {
     <div className='container' >
         <div className='row'>
          <div className="post post-public-actions mt-2">
-            <span className='bottom-action'><i className="fa fa-comment-o"/>  {post.comment.length-1} Comments</span>
-            <span className='bottom-action bottom-action-like' onClick={()=>{
+            <div><span className='bottom-action'><i className="fa fa-comment-o"/>  {post.comment.length-1} Comments</span></div>
+            <div><span className='bottom-action bottom-action-like' onClick={()=>{
                 handleColor(color);
-            }}><i className={`fa fa-heart fa-${index}`} style={{color:`${color}`,border:"none"}}></i>  {likes} Likes</span>
-            <span className='bottom-action bottom-action-view'><i className="fa fa-eye"/> {views} Views</span>
+            }}><i className={`fa fa-heart fa-${index}`} style={{color:`${color}`,border:"none"}}></i>  {likes} Likes</span> </div>
+            <div><span className='bottom-action bottom-action-view'><i className="fa fa-eye"/> {views} Views</span> </div>
         </div>
         <div className='post post-public-comments ml-3'>
             <button className={`btn btn-show-comment btn-show-comments-${index}`} onClick={handleDisplayClick}>{showComments? <span>Hide Comment</span>:<span>show Comments</span>}</button>

@@ -65,10 +65,12 @@ function Home() {
                     </p>    
                     <hr/>            
                     <div className="actions ">
-                        <span className='bottom-action username' style={{fontWeight:'600'}}>👤 {post.username}</span>                        
+                        <div><span className='bottom-action username' style={{fontWeight:'600'}}>👤 {post.username}</span></div>              
+                        
+                        <div><span className='bottom-action'><i className="fa fa-clock-o"/> {new Date(post.date).toDateString()}</span></div>
                         {
                             localStorage.getItem("id")===post.userid?
-                            <><span onClick={(e)=>{
+                            <><div><span onClick={(e)=>{
                                 e.preventDefault();
                                 setpopup(true);
                                 settitle(post.title);
@@ -76,20 +78,19 @@ function Home() {
                             }
                             }><button className='bottom-action'><i className="fa fa-trash" style={{color:"red"}}
                             
-                            /> Delete</button></span>
-                            <span onClick={(e)=>{
+                            /> Delete</button></span></div>
+                            <div><span onClick={(e)=>{
                                 e.preventDefault();
                                 seteditpopup(true);
                                 setpost(post)
                             }
                             }>
                             <button className='bottom-action' ><i className="fa fa-edit" style={{color:"green"}}
-                            /> Edit</button></span>
+                            /> Edit</button></span></div>
                             </>
                             :null
 
                         }
-                        <span className='bottom-action'><i className="fa fa-clock-o"/> {new Date(post.date).toDateString()}</span>
                     </div>
                     <PostBottomActions post={post}  key={index} />
                 </div>

@@ -14,6 +14,9 @@
 }
 .actions{
     color:rgb(65, 2, 76);
+    display: flex;
+    justify-content:flex-start;
+    flex-direction: row;
 }
 
 .card{
@@ -52,7 +55,14 @@ h3,p,span{
     color:rgba(17, 58, 87, 0.029);
 }
 
-
+.post-public-actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    
+}
 @media screen and (max-width:746px){
     .PostImage{
         width: 100%;
@@ -61,10 +71,11 @@ h3,p,span{
     }
     .actions{
         margin-top: -10px;
-        display: grid;        
-        font-size: 10px;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+
+        
 
     
     }

@@ -57,7 +57,7 @@ export default function Header() {
                         <Link className='nav-link' to="/"><i className="fa fa-home">Home</i></Link>
                     </li>
                     <li className="nav-item">
-                    <Link className='nav-link' to="/create"><i className='fa fa-edit' >Create</i></Link>
+                    <Link className='nav-link' to="/create"><i className='fa fa-edit' >Write</i></Link>
                     </li>
                     <li className="nav-item">
                     <Link className='nav-link' to="/setting"><i className='fa fa-cog'>Setting</i></Link>
