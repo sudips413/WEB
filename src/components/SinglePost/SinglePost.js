@@ -6,6 +6,7 @@ import Edit from '../popup/Edit';
 import axios from 'axios';
 import "./singlepost.css";
 import PostBottomActions from '../Home/PostBottomActions';
+import Post from '../Home/Post';
 
 
 function SinglePost() {
@@ -78,7 +79,7 @@ function SinglePost() {
                                 <h3>{post.title}</h3>
                             </div>
                             <div className='post-description'>
-                                <p>{post.description}</p>
+                                <Post post={post} key={index}/>
                             </div>    
                         </div>
                         <div>

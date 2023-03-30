@@ -10,6 +10,7 @@ import Edit from '../popup/Edit';
 import allActions from '../../actions';
 import PostBottomActions from './PostBottomActions';
 import { useNavigate } from 'react-router-dom';
+import Post from './Post';
 function Home() {
   const [title,settitle] = useState("");
   const [popup,setpopup] = useState(false);
@@ -35,12 +36,14 @@ function Home() {
     fetchposts();
     },[])
     const isLoading = useSelector(state=>state.loadingStatusReducer.loadingStatus); 
+    
   return (
     
     <div className='container container-width'>
         {isLoading? <center style={{marginTop:"20%",color:"red"}}><span color={"red"}>Loading Might take more than 5sec...</span><br/><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
         { posts? posts.map((post,index)=>{
             // dispatch(allActions.add_comment(post.comment));
+            
             return(
             <div className='card-body col-12 mt-5' key={index} >
                 <div className='card-image text-center mb-2'>
@@ -49,20 +52,9 @@ function Home() {
                 </div>
                 <div className='card-description details'>
                     <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
-                    <p className='card-content'>
-                        {post.description} <a href={{}} onClick={(e)=>{
-                            e.preventDefault();
-                            localStorage.setItem("postId",post._id);
-                            navigate(`/singlepost/${post._id}`);
-                            axios.put(`https://blog-1pne.onrender.com/api/post/increaseview/${post._id}`)
-                            .then(res=>{
-                            })
-                            .catch(err=>{
-            
-                            })
-                            
-                        }} className='read-more'>Read More</a>
-                    </p>    
+                    <div className='card-content' id="card-content-descp"> 
+                        <Post post={post} key={index}/>
+                    </div>    
                     <hr/>            
                     <div className="actions ">
                         <div><span className='bottom-action username' style={{fontWeight:'600'}}>👤 {post.username}</span></div>              

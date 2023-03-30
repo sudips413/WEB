@@ -4,7 +4,7 @@ import axios from 'axios';
 import gif from '../../components/image/giphy.gif'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { Editor } from "@tinymce/tinymce-react";
 
 
 export default function Create() {
@@ -14,7 +14,6 @@ export default function Create() {
     const [wait,setwait]=React.useState(true);
     const navigate = useNavigate();
     const currentUser = useSelector(state => state.userReducer.currentUser);
-
   return (
     <>
     <div className='container mt-5'>
@@ -22,7 +21,7 @@ export default function Create() {
             <div className='col-2'>
              </div>   
               
-            
+           
             <div className='col-lg-8 col-md-8 col-xs-10'>
             <div className='postidea'>
                 <div className='row '  style={{fontFamily:"monospace"}}>
@@ -35,6 +34,7 @@ export default function Create() {
                     <div className='col-lg-12 col-md-12 col-xs-12'>
                     <form className="col-10 createform"id="myform" onSubmit={(e)=>{
                         e.preventDefault();
+                        document.getElementById("error").innerHTML="Posting...";
                         const data = new FormData();
                         data.append("title",title);
                         data.append("description",description);
@@ -49,7 +49,6 @@ export default function Create() {
                         })
                         .then((res)=>{
                             if(res.data.success){
-                                document.getElementById("error").innerHTML = res.data.message;
                                 setTimeout(()=>{
                                 setwait(false);
                                 },500);
@@ -88,12 +87,40 @@ export default function Create() {
                                 setimage(e.target.files[0]);
                             }} className='form-control' id='image' placeholder='Enter Image' style={{width:"50%"}} required/>
                             <label for='description'>Description</label>
-                            <textarea className='form-control' id='description' placeholder='Enter Description' rows='5' onChange={(e)=>{
+                            <Editor 
+                            apiKey="uysetdm5b097olv64hv0dduduaq16b12fzw935px9x45rfxq"
+                            init={{
+                              height: 300,
+                              plugins: [
+                                "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
+                              ],
+                              toolbar:
+                                "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | removeformat | link ",
+                              menubar: false,
+                              block_formats: "Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3",
+                              content_style: `
+                                    body {
+                                      font-family: Arial, sans-serif;
+                                      margin: 12px;
+                                    }
+                                    h1, h2, h3, p {
+                                      color: #4D66CB;
+                                      margin: 5px;
+                                    }
+                                    `,
+                            }}
+                            onEditorChange={(content, editor) => {
+                                setdescription(content);
+                                console.log(content);
+                            }}
+                            />
+                            {/* <textarea className='form-control' id='description' placeholder='Enter Description' rows='5' onChange={(e)=>{
                                 
                                 setdescription(e.target.value);
                               
                                 
-                            }} required></textarea>
+                            }} required></textarea> */}
+                            
                             <br/>
                             <button type='submit' className='btn btn-primary postbtn'>Post</button>
                             {wait && <p id="error" style={{color:"green",fontSize:"20px"}}></p>}

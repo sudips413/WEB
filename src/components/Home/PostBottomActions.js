@@ -3,6 +3,7 @@ import "./Posts.css"
 import { useSelector} from "react-redux";
 import axios from 'axios';
 
+
 function PostBottomActions({post,index}) {
     const [showComments,setshowComments] = React.useState(false);
     const [comment,setcomment] = React.useState("");

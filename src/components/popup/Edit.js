@@ -2,6 +2,7 @@ import React from 'react'
 import './edit.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { Editor } from '@tinymce/tinymce-react';
 
 export default function Edit({closepopup,content}) {
     const[newtitle,setnewtitle]=React.useState(content.title);
@@ -17,8 +18,11 @@ export default function Edit({closepopup,content}) {
       <button className="close-btn mr-0 mt-2"  onClick={closepopup}>X</button>
         <h3 className="text-center ">Edit {content.title} Post</h3>
         <form  onSubmit={(e)=>{
-                e.preventDefault();               
-                
+                e.preventDefault();
+                document.getElementById("error").innerHTML="Updating...";
+                document.querySelector(".btn2").disabled=true;
+
+
                 const data = new FormData();
                 data.append("title",newtitle);
                 data.append("description",newcontent);
@@ -38,9 +42,11 @@ export default function Edit({closepopup,content}) {
                     setTimeout(() => {
                         window.location.reload();
                     }, 500);
+                    document.querySelector(".btn2").disabled=false;
                 })
                 .catch(err=>{
                     alert(err);
+                    document.querySelector(".btn2").disabled=false;
                 })
 
           }}>
@@ -51,11 +57,40 @@ export default function Edit({closepopup,content}) {
             }} required  />
           </div>
           <div className="form-group">
+          <Editor 
+            apiKey="uysetdm5b097olv64hv0dduduaq16b12fzw935px9x45rfxq"
+            init={{
+              height: 200,
+              width: 600,
+              plugins: [
+                "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
+              ],
+              toolbar:
+                "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | removeformat | link ",
+              menubar: true,
+              block_formats: "Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3",
+              content_style: `
+                    body {
+                      font-family: Arial, sans-serif;
+                      margin: 12px;
+                    }
+                    h1, h2, h3, p {
+                      color: #4D66CB;
+                      margin: 5px;
+                    }
+                    `,
+            }}
+            initialValue={content.description}
+            onEditorChange={(content, editor) => {
+                setnewcontent(content);
+            }}
+            />
             
-            <textarea className="form-control" defaultValue={content.description} id="edescription" rows="5" onChange={(e)=>{
+            {/* <textarea className="form-control" defaultValue={content.description} id="edescription" rows="5" onChange={(e)=>{
                 setnewcontent(e.target.value);
 
-            }}required></textarea>
+                
+            }}required></textarea> */}
           </div>
           {/* <div className="form-group">
             <input type="file" id="image" className="form-control mt-2" accept="image/png, image/gif, image/jpeg" 
