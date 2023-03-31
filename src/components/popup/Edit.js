@@ -59,7 +59,7 @@ export default function Edit({closepopup,content}) {
           <Editor 
             apiKey="uysetdm5b097olv64hv0dduduaq16b12fzw935px9x45rfxq"
             init={{
-              height: 200,
+              height: 500,
               className:" col-lg-12 col-md-12 col-xs-12",
               plugins: [
                 "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
