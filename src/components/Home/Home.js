@@ -45,7 +45,7 @@ function Home() {
             // dispatch(allActions.add_comment(post.comment));
             
             return(
-            <div className='card-body col-12 mt-5' key={index} >
+            <div className='card-body card-body-post col-12 mt-5' key={index} >
                 <div className='card-image text-center mb-2'>
                     
                     <img src={post.image}  className="PostImage mx-auto" alt="logo"/>

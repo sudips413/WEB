@@ -7,15 +7,16 @@ export default function Post({post}) {
     const navigate = useNavigate();
     const element="<p>Hello</p>"
     function MyComponent() {
-        return <div dangerouslySetInnerHTML={{__html: post.description}} />;
+        return <div  dangerouslySetInnerHTML={{__html: post.description}} />;
 
       }
   return (
     <>                        
-    
+    <div className="singlepost-div">
     {
         MyComponent()
     }
+    </div>
     
 
     <p><a href={{}} onClick={(e)=>{

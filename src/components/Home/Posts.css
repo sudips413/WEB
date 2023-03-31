@@ -63,6 +63,10 @@ h3,p,span{
     text-align: left;
     
 }
+/* .singlepost-div{
+  height:200px;
+  overflow: hidden;
+} */
 @media screen and (max-width:746px){
     .PostImage{
         width: 100%;

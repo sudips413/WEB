@@ -32,7 +32,7 @@ export default function Create() {
                     </center>
                    
                     <div className='col-lg-12 col-md-12 col-xs-12'>
-                    <form className="col-10 createform"id="myform" onSubmit={(e)=>{
+                    <form className="col-12 createform"id="myform" onSubmit={(e)=>{
                         e.preventDefault();
                         document.getElementById("error").innerHTML="Posting...";
                         const data = new FormData();

@@ -12,8 +12,7 @@ export default function Edit({closepopup,content}) {
 
     return (
     <div className="popup-container">
-     <div className="popup-body col-lg-8 col-md-10 col-xs-12">
-      <div className="popup-header">
+     <div className="popup-body col-lg-10 col-md-10 col-xs-12">
         <center>
       <button className="close-btn mr-0 mt-2"  onClick={closepopup}>X</button>
         <h3 className="text-center ">Edit {content.title} Post</h3>
@@ -50,24 +49,24 @@ export default function Edit({closepopup,content}) {
                 })
 
           }}>
-          <div className="form-group">           
+                  
             
             <input type="text" defaultValue={content.title} className="form-control" id="title" aria-describedby="emailHelp" onChange={(e)=>{
                 setnewtitle(e.target.value);
             }} required  />
-          </div>
-          <div className="form-group">
+          
+          
           <Editor 
             apiKey="uysetdm5b097olv64hv0dduduaq16b12fzw935px9x45rfxq"
             init={{
               height: 200,
-              width: 600,
+              className:" col-lg-12 col-md-12 col-xs-12",
               plugins: [
                 "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
               ],
               toolbar:
                 "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | removeformat | link ",
-              menubar: true,
+              menubar: false,
               block_formats: "Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3",
               content_style: `
                     body {
@@ -91,7 +90,6 @@ export default function Edit({closepopup,content}) {
 
                 
             }}required></textarea> */}
-          </div>
           {/* <div className="form-group">
             <input type="file" id="image" className="form-control mt-2" accept="image/png, image/gif, image/jpeg" 
             src={content.image}
@@ -109,6 +107,6 @@ export default function Edit({closepopup,content}) {
       
       
      </div>
-    </div>
+  
       );
 }
