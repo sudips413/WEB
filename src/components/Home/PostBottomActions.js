@@ -16,7 +16,7 @@ function PostBottomActions({post,index}) {
     }
     const [color,setcolor] = React.useState("green");
     function handleColor(color){
-        if (color==="yellow"){
+        if (color==="green"){
             setcolor("red");
             setlikes(likes+1);
             axios.put(`https://blog-1pne.onrender.com/api/post/increaselike/${post._id}`)
@@ -27,7 +27,7 @@ function PostBottomActions({post,index}) {
 
         }
         else{
-            setcolor("yellow");
+            setcolor("green");
             setlikes(likes-1);
             axios.put(`https://blog-1pne.onrender.com/api/post/decreaselike/${post._id}`)
         }
