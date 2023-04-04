@@ -33,11 +33,11 @@ export default function Header() {
                 ):
                 null
                 }
-                <span className='blogtitle mt-0'>
+                <span className='blogtitle mt-2'>
                 {currentUser.currentUser.username}
                 </span>
             </Link>):(
-                <span className='blogtitle'>TELLUS</span>
+                <span className='blogtitle' style={{fontWeight:"bold"}}>सबैPOST</span>
             )}
             <div>
             <button className='displayMenu'  style={{border:"none",borderRadius:"10px",width:"40px",height:"40px"}} onClick={()=>{
