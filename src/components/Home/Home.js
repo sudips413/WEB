@@ -45,6 +45,7 @@ function Home() {
             // dispatch(allActions.add_comment(post.comment));
             
             return(
+            <>
             <div className='card-body card-body-post col-12 mt-5' key={index} >
                 <div className='card-image text-center mb-2'>
                     
@@ -87,6 +88,8 @@ function Home() {
                     <PostBottomActions post={post}  key={index} />
                 </div>
             </div>  
+            {/* <hr className='post-separater'/> */}
+            </>
         )        
         }):
         <div className="spinner-border text-primary" role="status">

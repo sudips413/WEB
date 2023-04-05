@@ -21,9 +21,8 @@ export default function Login() {
       {regStatus && <div className="alert alert-success" role="alert"><i className='fa fa-check'> </i> Registration Success, Please Login</div>}
         <form className="form col-12" onSubmit={async (e)=>{
           e.preventDefault();
-          document.getElementById("registerLoading").style.display="block";
-          
           if(email && password){
+            document.getElementById("registerLoading").style.display="block";
             document.getElementById("logIn").style.display="block";
             await axios.post("https://blog-1pne.onrender.com/api/login",{
               email:email,

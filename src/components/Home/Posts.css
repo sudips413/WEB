@@ -63,6 +63,7 @@ h3,p,span{
     text-align: left;
     
 }
+
 /* .singlepost-div{
   height:200px;
   overflow: hidden;
@@ -217,5 +218,12 @@ span>.bottom-action:hover{
     border-radius: 5px;
     border: none;
     cursor: pointer;
+  }
+  .bottom-action-comment{
+    cursor: pointer;
+    color: #090102;
+  }
+  .bottom-action-comment:hover{
+    color: rgb(16, 92, 4);
   }
   

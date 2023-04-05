@@ -40,16 +40,16 @@ function PostBottomActions({post,index}) {
     <div className='container' >
         <div className='row'>
          <div className="post post-public-actions mt-2">
-            <div><span className='bottom-action'><i className="fa fa-comment" style={{color:"blue"}}/>  {post.comment.length-1} Comments</span></div>
+            <div><a href className='bottom-action bottom-action-comment' onClick={handleDisplayClick}><i className="fa fa-comment" style={{color:"blue"}} />  {post.comment.length-1} Comments</a></div>
             <div><span className='bottom-action bottom-action-like' onClick={()=>{
                 handleColor(color);
             }}><i className={`fa fa-heart fa-${index}`} style={{color:`${color}`,border:"none"}}></i>  {likes} Likes</span> </div>
             <div><span className='bottom-action bottom-action-view'><i className="fa fa-eye" style={{color:"blue"}}/> {views} Views</span> </div>
         </div>
         <div className='post post-public-comments ml-3'>
-            <button className={`btn btn-show-comment btn-show-comments-${index}`} onClick={handleDisplayClick}>{showComments? <span>Hide Comment</span>:<span>show Comments</span>}</button>
+            {/* <button className={`btn btn-show-comment btn-show-comments-${index}`} onClick={handleDisplayClick}>{showComments? <span>Hide Comment</span>:<span>show Comments</span>}</button> */}
             {showComments && <div class={`comment comment-list${index}`}>
-                <div class="comment">
+                <div class="comment mt-2">
                     { 
                     post.comment.map((comment,index)=>{
                         return(

@@ -1,11 +1,9 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ReactDOM from 'react-dom';
 
 export default function Post({post}) {
     const navigate = useNavigate();
-    const element="<p>Hello</p>"
     function MyComponent() {
         return <div  dangerouslySetInnerHTML={{__html: post.description}} />;
 
