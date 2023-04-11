@@ -57,10 +57,10 @@ function PostBottomActions({post,index}) {
                             <>
                                 <div class="comment-author" key={index}>
                                     <img src={comment.image} style={{height:"40px",width:"40px",borderRadius:"50%"}} alt="avatar" />
-                                    <span class="comment-author-name">{comment.username}</span>
+                                    <span class="comment-author-name" >{comment.username}</span>
                                 </div>
                                 <div className='comment-content'>
-                                    <span style={{marginLeft:"10%"}}>{comment.comment}</span>
+                                    <span style={{marginLeft:"12%"}}>{comment.comment}</span>
                                     
                                 </div>
                                 </>
@@ -73,7 +73,7 @@ function PostBottomActions({post,index}) {
                         <span class="comment-author-name">{newComment.username}</span>
                     </div>
                     <div className='comment-content'>
-                        <span style={{marginLeft:"10%"}}>{newComment.comment}</span>
+                        <span style={{marginLeft:"12%"}}>{newComment.comment}</span>
                         
                     </div> </>
                     :null}
@@ -85,9 +85,6 @@ function PostBottomActions({post,index}) {
                         <br/>
                         <button className='btn btn-show-comment btn-primary' id={`btn-comment-${index}`} onClick={async (e)=>{
                             e.preventDefault();
-                            document.getElementById(`btn-comment-${index}`).disabled=true;
-                            document.getElementById(`btn-comment-${index}`).cursor="not-allowed";
-
                            let id= localStorage.getItem("id");
                             if(!id){
                                 alert("Please login first");
@@ -98,6 +95,8 @@ function PostBottomActions({post,index}) {
                                     alert("Please enter a comment");
                                     return;
                                 }else{
+                                document.getElementById(`btn-comment-${index}`).disabled=true;
+                                document.getElementById(`btn-comment-${index}`).cursor="not-allowed";
                                 const userid = localStorage.getItem("id");
                                 const username = currentUser.currentUser.username;
                                 const image = currentUser.currentUser.image;

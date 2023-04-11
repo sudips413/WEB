@@ -64,10 +64,22 @@ h3,p,span{
     
 }
 
-/* .singlepost-div{
-  height:200px;
-  overflow: hidden;
-} */
+
+.comment-author-name{
+    font-size: 16px;
+    font-family: 'Philosopher', sans-serif;
+    font-weight: 500;
+    color: rgb(184, 52, 4);
+    margin-bottom: 10px;
+    margin-top: 5px;
+    text-align: left;
+}
+.input-comment>input{
+  border-radius: 5px;
+  border:none;
+  background-color: rgb(129, 185, 235);
+  color: black  ;
+}
 @media screen and (max-width:746px){
     .PostImage{
         width: 100%;

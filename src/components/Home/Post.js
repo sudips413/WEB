@@ -2,22 +2,35 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Post({post}) {
+export default function Post({post,halfContent}) {
     const navigate = useNavigate();
+    console.log(halfContent);
     function MyComponent() {
-        return <div  dangerouslySetInnerHTML={{__html: post.description}} />;
+        return <>
+          <div className="singlepost-div" >
+            <div dangerouslySetInnerHTML={{__html: post.description}}
+            style={{
+            overflow:"hidden",
+            textOverflow:"ellipsis ellipsis-2",
+            height: halfContent? "150px":"auto",
+
+            }}
+            />
+          </div>
+          </>
 
       }
+
   return (
     <>                        
-    <div className="singlepost-div">
+    
     {
         MyComponent()
     }
-    </div>
+    
     
 
-    <p><a href={{}} onClick={(e)=>{
+    <p>{halfContent?<a href={{}} onClick={(e)=>{
         e.preventDefault();
         localStorage.setItem("postId",post._id);
         navigate(`/singlepost/${post._id}`);
@@ -28,8 +41,8 @@ export default function Post({post}) {
 
         })
         
-    }} className='read-more'>Read More</a>
-    </p>  
+    }} className='read-more'>View More</a> :null}</p>
+  
                     
     </>
     

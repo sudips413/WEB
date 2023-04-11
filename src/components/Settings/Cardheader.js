@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from 'axios';
 import './settings.css'
+import { useSelector } from 'react-redux';
 
 function Cardheader({users,index}) {
-    const [isFollowing, setIsFollowing] = React.useState(false);
-
+    const currentUser = useSelector(state => state.userReducer.currentUser);
+    const [isFollowing, setIsFollowing] = React.useState(currentUser.followings.includes(users._id));
     const handleFollowClick = () => {
       setIsFollowing(!isFollowing);
       const followGarneManxeId = localStorage.getItem("id");

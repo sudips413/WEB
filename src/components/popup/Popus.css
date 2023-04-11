@@ -10,6 +10,19 @@
     bottom: 0;
     background-color: rgba(45, 45, 45, 0.5);
     }
+.popup-body-delete{
+    position: absolute;
+    left: 35%;
+    right: 35%;
+    bottom: 40%;
+    top: 20%;
+    text-align: center;
+    margin: auto;
+    border-radius: 15px;
+    border-color: black;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
 .popup-body {
     position: absolute;
     left: 35%;

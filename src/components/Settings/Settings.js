@@ -317,17 +317,13 @@ export default function Settings() {
                     { 
                      allUser === [] || allUser === "undefined"? (<span> No Users Found</span>):
                      (
-                       allUser.map((users,index)=>{
-                        //display only fitst five users
-                        if(index<5){
-                            
+                       allUser.map((users,index)=>{ 
                             return(
                                 <div classname="following">
 
                                 <Cardheader users={users} key={index} />
                                 </div>
                             )
-                        }
                         })
                      )
                     }

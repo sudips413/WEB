@@ -79,7 +79,7 @@ function SinglePost() {
                                 <h3>{post.title}</h3>
                             </div>
                             <div className='post-description'>
-                                <Post post={post} key={index}/>
+                                <Post post={post} key={index} halfContent={false}/>
                             </div>    
                         </div>
                         <div>

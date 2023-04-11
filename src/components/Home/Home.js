@@ -12,13 +12,13 @@ import PostBottomActions from './PostBottomActions';
 import { useNavigate } from 'react-router-dom';
 import Post from './Post';
 function Home() {
+
   const [title,settitle] = useState("");
   const [popup,setpopup] = useState(false);
   const [postid,setpostid] = useState(null);
   const [postcontent,setpost] = useState([]);
   const [editpopup,seteditpopup] = useState(false); 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const id = localStorage.getItem("id");
   const posts = useSelector(state=>state.postReducer.posts); 
     const fetchposts = async()=>{
@@ -54,7 +54,7 @@ function Home() {
                 <div className='card-description details'>
                     <h3 style={{textAlign:"center"}} className='title'>{post.title}</h3>
                     <div className='card-content' id="card-content-descp"> 
-                        <Post post={post} key={index}/>
+                        <Post post={post} key={index} halfContent={true}/>
                     </div>    
                     <hr/>            
                     <div className="actions ">

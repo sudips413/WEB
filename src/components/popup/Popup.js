@@ -5,7 +5,7 @@ import axios from 'axios';
 export default function Popup({closepopup,title,id}) {
     return (
         <div className="popup-container">
-         <div className="popup-body">
+         <div className="popup-body-delete">
           <div className="popup-header">
             <center>
           

@@ -61,29 +61,32 @@ export default function Edit({closepopup,content}) {
             init={{
               height: 400,
               className:" col-lg-12 col-md-12 col-xs-12",
-              plugins: [
-                "a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
-              ],
+              plugins: 
+                "a11ychecker| advcode | advlist | advtable | anchor | autocorrect | autosave | editimage | image | link | linkchecker | lists | media | mediaembed | pageembed | powerpaste | searchreplace | table | template  | tinymcespellchecker | typography | visualblocks | wordcount | code", // Add "code" plugin here
+                
               toolbar:
-                "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | removeformat | link ",
-              menubar: false,
+                "undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | removeformat | link | code", // Add "code" button to the toolbar
+              menubar: "tools",
+              code_dialog_height: 400,
+              code_dialog_width: 600,
               block_formats: "Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3",
               content_style: `
-                    body {
-                      font-family: Arial, sans-serif;
-                      margin: 12px;
-                    }
-                    h1, h2, h3, p {
-                      color: #4D66CB;
-                      margin: 5px;
-                    }
-                    `,
+                body {
+                  font-family: Arial, sans-serif;
+                  margin: 12px;
+                }
+                h1, h2, h3, p {
+                  color: #4D66CB;
+                  margin: 5px;
+                }
+              `,
             }}
             initialValue={content.description}
             onEditorChange={(content, editor) => {
-                setnewcontent(content);
+              setnewcontent(content);
             }}
-            />
+          />
+
             
             {/* <textarea className="form-control" defaultValue={content.description} id="edescription" rows="5" onChange={(e)=>{
                 setnewcontent(e.target.value);
