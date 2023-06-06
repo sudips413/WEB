@@ -3,7 +3,9 @@ import './Footer.css'
 
 function Footer() {
   return (
-    <div className='footer'>Made with ❤️ by Sudip Shrestha</div>
+    <div className='footer' style={{
+      marginTop:"100px"
+    }}>Made with ❤️ by Sudip Shrestha</div>
   )
 }
 

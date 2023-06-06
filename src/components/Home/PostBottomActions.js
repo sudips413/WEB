@@ -11,6 +11,7 @@ function PostBottomActions({post,index}) {
     // const [commentCount,setcommentCount] = React.useState(post.comment.length-1);
     const [views,setviews] = React.useState(post.views);
     const comments = useSelector(state => state.commentReducer);
+    console.log(post)
     function handleDisplayClick(){
         setshowComments(!showComments);
     }
@@ -40,7 +41,7 @@ function PostBottomActions({post,index}) {
     <div className='container' >
         <div className='row'>
          <div className="post post-public-actions mt-2">
-            <div><a href className='bottom-action bottom-action-comment' onClick={handleDisplayClick}><i className="fa fa-comment" style={{color:"blue"}} />  {post.comment.length-1} Comments</a></div>
+            <div><a href className='bottom-action bottom-action-comment' onClick={handleDisplayClick}><i className="fa fa-comment" style={{color:"black"}} />  {post.comment.length-1} Comments</a></div>
             <div><span className='bottom-action bottom-action-like' onClick={()=>{
                 handleColor(color);
             }}><i className={`fa fa-heart fa-${index}`} style={{color:`${color}`,border:"none"}}></i>  {likes} Likes</span> </div>
@@ -54,16 +55,22 @@ function PostBottomActions({post,index}) {
                     post.comment.map((comment,index)=>{
                         return(
                             comment.username === "" ? null:
-                            <>
+                            <div class="comment-author-main" >
                                 <div class="comment-author" key={index}>
                                     <img src={comment.image} style={{height:"40px",width:"40px",borderRadius:"50%"}} alt="avatar" />
                                     <span class="comment-author-name" >{comment.username}</span>
                                 </div>
                                 <div className='comment-content'>
                                     <span style={{marginLeft:"12%"}}>{comment.comment}</span>
+                                    { comment.userid === localStorage.getItem("id")?
+                                    <button className="btn" > <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                                    </svg></button> :   null
+                                    }
                                     
                                 </div>
-                                </>
+                            </div>
+                
                                 )
                             })
                     }
@@ -87,13 +94,11 @@ function PostBottomActions({post,index}) {
                             e.preventDefault();
                            let id= localStorage.getItem("id");
                             if(!id){
-                                alert("Please login first");
-                                return;
+                                document.getElementById('loginFirst').innerHTML="Please Login First to comment";
                             }
                             else{
                                 if(comment===""){
-                                    alert("Please enter a comment");
-                                    return;
+                                    document.getElementById('loginFirst').innerHTML="! No comments";
                                 }else{
                                 document.getElementById(`btn-comment-${index}`).disabled=true;
                                 document.getElementById(`btn-comment-${index}`).cursor="not-allowed";
@@ -125,6 +130,8 @@ function PostBottomActions({post,index}) {
                             }
                         }
                         }}>Comment</button>
+                        <br/>
+                        <span id="loginFirst" style={{color:"red"}}></span>
                     </div>
                 </div>       
 

@@ -4,7 +4,6 @@ import axios from 'axios';
 
 export default function Post({post,halfContent}) {
     const navigate = useNavigate();
-    console.log(halfContent);
     function MyComponent() {
         return <>
           <div className="singlepost-div" >

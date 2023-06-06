@@ -174,61 +174,6 @@ export default function Settings() {
             <div className="col-lg-6 col-md-6 col-sm-8 col-xs-10">
                 <div className="row card-content-password">
                     <div className="card col-lg-12 col-md-12 col-xs-12 card-content"> 
-                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Followers</label> 
-                    <div className='followers'>                    {
-                        currentUser.followers.length>=1 ?(
-                            currentUser.followers.map((user,index)=>{
-                                // check if user id exists in the allUser array
-                                function followerFinder(){
-                                    for(let i=0;i<allUser.length;i++){
-                                        if(allUser[i]._id === user){
-                                            return allUser[i];
-                                        }
-                                    }
-                                }  
-                                return(
-                                     <div className="card-header" key={index}>
-                                        <img src={followerFinder().image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"50%"}} />
-                                        <span>{followerFinder().name}</span>
-
-                                    </div>
-                                
-                                )
-                            })
-                        ):(
-                            <span> You dont have Followers.</span>
-                        )
-                    }  
-                    </div>                 
-                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Following</label> 
-                    <div className='following'>
-                    {
-                        currentUser.followings.length>=1 ?(
-
-                            currentUser.followings.map((user,index)=>{
-                                // check if user id exists in the allUser array
-                                function FollowingFinder(){
-                                    for(let i=0;i<allUser.length;i++){
-                                        if(allUser[i]._id === user){
-                                            return allUser[i];
-                                        }
-                                    }
-                                }
-                                 
-                                return(
-                                     <div className="card-header" key={index}>
-                                        <img src={FollowingFinder().image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"50%"}} />
-                                        <span>{FollowingFinder().name}</span>
-
-                                    </div>
-                                )
-                            })
-                        ):(
-                            <span> You dont have follwings.</span>
-                        )
-                    }
-                    </div>
-                    <br/>
                     <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Posts</label>
                     {countPosts()>=1 ?( 
                     posts.map((post,index)=>{
@@ -261,6 +206,64 @@ export default function Settings() {
                     ):(<span> You have no posts yet.</span>)
                               
                     } 
+                    <br/>
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >My Followers</label> 
+                    <div className='followers'>                    {
+                        currentUser.followers.length>=1 ?(
+                            currentUser.followers.map((user,index)=>{
+                                // check if user id exists in the allUser array
+                                function followerFinder(){
+                                    for(let i=0;i<allUser.length;i++){
+                                        if(allUser[i]._id === user){
+                                            return allUser[i];
+                                        }
+                                    }
+                                }  
+                                return(
+                                     <div className="card-header" key={index}>
+                                        <img src={followerFinder().image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"50%"}} />
+                                        <span>{followerFinder().name}</span>
+
+                                    </div>
+                                
+                                )
+                            })
+                        ):(
+                            <span> You dont have Followers.</span>
+                        )
+                    }  
+                    </div>       
+                    <br/>          
+                    <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}} >Following</label> 
+                    <div className='following'>
+                    {
+                        currentUser.followings.length>=1 ?(
+
+                            currentUser.followings.map((user,index)=>{
+                                // check if user id exists in the allUser array
+                                function FollowingFinder(){
+                                    for(let i=0;i<allUser.length;i++){
+                                        if(allUser[i]._id === user){
+                                            return allUser[i];
+                                        }
+                                    }
+                                }
+                                 
+                                return(
+                                     <div className="card-header" key={index}>
+                                        <img src={FollowingFinder().image} alt="logo" style={{height:"50px",width:"50px",borderRadius:"50%"}} />
+                                        <span>{FollowingFinder().name}</span>
+
+                                    </div>
+                                )
+                            })
+                        ):(
+                            <span> You dont have follwings.</span>
+                        )
+                    }
+                    </div>
+                    <br/>
+                    
                     </div>    
 
 
@@ -309,6 +312,13 @@ export default function Settings() {
                             {wait && <p id="err" style={{color:"red"}}></p>}   
                         </div>
                     </div>
+                    <div className="card col-lg-12 col-md-12 col-xs-12 card-delete-account">
+                        <label style={{color:"orange",fontSize:"20px",fontWeight:"600"}}>Delete Account</label>
+                        <div className="card-header">
+                            Deleting your account will permanently remove all of your data from our servers. This includes all of your posts, comments, messages, and followers. This action cannot be undone.                            <br/>
+                            <button className="btn btn-danger mt-1 mb-2 col-xs-8" style={{width:"60%"}}>Delete Account</button>
+                        </div>
+                    </div>
                 </div>    
             </div>  
             <div className="col-lg-3 col-md-3 col-sm-8 col-xs-12">
@@ -331,7 +341,7 @@ export default function Settings() {
                     <button className='btn btn-info text-center mb-2' style={{width:"150px"}}>Follow More</button>
                     </center>
                 </div>    
-            </div>                 
+            </div>                
 
 
         </div>          

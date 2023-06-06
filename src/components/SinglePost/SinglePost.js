@@ -76,9 +76,13 @@ function SinglePost() {
                                 <img src={post.image} alt='post' className='post-image'/>
                             </div>
                             <div className='post-title'>
-                                <h3>{post.title}</h3>
+                                <h3 style={{
+                                    color:"black",
+                                }}>{post.title}</h3>
                             </div>
-                            <div className='post-description'>
+                            <div className='post-description' style={{
+                                color:"black",
+                            }}>
                                 <Post post={post} key={index} halfContent={false}/>
                             </div>    
                         </div>

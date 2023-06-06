@@ -42,7 +42,7 @@ function Cardheader({users,index}) {
         className={`btn btn-follow btn-follow-${index} mt-3 text-center`}
         onClick={handleFollowClick}
         style={{
-          backgroundColor: isFollowing ? "green" : "white",
+          backgroundColor: isFollowing ? "#40E0D0" : "#6495ED",
           color: isFollowing ? "white" : "black"
         }}
       >

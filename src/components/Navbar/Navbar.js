@@ -20,7 +20,7 @@ export default function Header() {
     <header>
         
         
-        <nav className="navbar navbar-expand-sm">
+        <nav className="navbar navbar-expand-sm bg-light">
             <div className="container-fluid ">
             {currentUser.currentUser.loginStatus? 
             (<Link to="/setting" className="navbar-brand fw-bold d-flex">

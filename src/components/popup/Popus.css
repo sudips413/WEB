@@ -12,8 +12,8 @@
     }
 .popup-body-delete{
     position: absolute;
-    left: 35%;
-    right: 35%;
+    left: 25%;
+    right: 25%;
     bottom: 40%;
     top: 20%;
     text-align: center;
@@ -60,4 +60,3 @@
     width: 100px;
     text-align: center;
 }
-
