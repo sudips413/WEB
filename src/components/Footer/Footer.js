@@ -7,7 +7,7 @@ function Footer() {
       marginTop:"100px"
     }}>
       <p>© 2021 - {
-        new Date().getFullYear()} All Rights Reserved 
+        new Date().getFullYear()} All Rights Reserved.
         <br/>
         Created by <a href='https://sudip-shrestha.com.np'>Sudip Shrestha</a>
         <br/>
