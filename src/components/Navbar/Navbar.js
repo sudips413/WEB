@@ -37,7 +37,7 @@ export default function Header() {
                 {currentUser.currentUser.username}
                 </span>
             </Link>):(
-                <span className='blogtitle' style={{fontWeight:"bold"}}>सबैPOST</span>
+                <span className='blogtitle' style={{fontWeight:"bold"}}>Knowledge Portal</span>
             )}
             <div>
             <button className='displayMenu'  style={{border:"none",borderRadius:"10px",width:"40px",height:"40px"}} onClick={()=>{

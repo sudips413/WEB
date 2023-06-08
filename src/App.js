@@ -62,19 +62,16 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home />} />
-              {/* {
+              {
                 id ? (
-                  <>
-                  <Route path="/login" element={<Home/>} />
-                  <Route path="/register" element={<Home/>} />
-                  </>
+                  null
                 ):
                 (<>
                   <Route path="/login" element={<Login />} />
                   <Route path="/register" element={<Register />} />
                 </>
                 )
-              } */}
+              }
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               

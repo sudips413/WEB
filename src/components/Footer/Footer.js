@@ -5,7 +5,16 @@ function Footer() {
   return (
     <div className='footer' style={{
       marginTop:"100px"
-    }}>Made with ❤️ by Sudip Shrestha</div>
+    }}>
+      <p>© 2021 - {
+        new Date().getFullYear()} All Rights Reserved 
+        <br/>
+        Created by <a href='sudip-shrestha.com.np'>Sudip Shrestha</a>
+        <br/>
+        <br/>
+      </p>
+    
+    </div>  
   )
 }
 

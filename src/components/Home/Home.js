@@ -106,7 +106,24 @@ function Home() {
             seteditpopup(false);
         }
         }content={postcontent}/>:null
-    }        
+    }
+    {/* sroll to top       */}
+    
+    {
+        // show top button only when the screen is scrolled down to 500px
+        
+    <button onClick={()=>{
+        window.scrollTo(0,0);
+    }} className="btn " style={{
+        display:posts.length>0?"block":"none",
+        position:"fixed",
+        bottom:"20px",
+        right:"30px",
+        zIndex:"99",
+        border:"none",
+        outline:"none",
+    }}><i className="fa fa-arrow-up"> Top</i></button>
+    }
     </div>            
   )
 }
