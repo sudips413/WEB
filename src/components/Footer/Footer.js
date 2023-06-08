@@ -9,7 +9,7 @@ function Footer() {
       <p>© 2021 - {
         new Date().getFullYear()} All Rights Reserved 
         <br/>
-        Created by <a href='sudip-shrestha.com.np'>Sudip Shrestha</a>
+        Created by <a href='https://sudip-shrestha.com.np'>Sudip Shrestha</a>
         <br/>
         <br/>
       </p>
