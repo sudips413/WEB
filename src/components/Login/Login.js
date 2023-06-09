@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import { useDispatch,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 import axios from 'axios';
 import allActions from '../../actions';
@@ -12,6 +13,7 @@ export default function Login() {
     const [error,seterror] = useState(true);
     const dispatch = useDispatch(); 
     const navigate = useNavigate();
+    const errorRef = useRef();
     const regStatus = useSelector(state=>state.registrationStatusReducer.registrationStatus);
   return (
     <>
@@ -61,7 +63,8 @@ export default function Login() {
               }
               else{
                 document.getElementById("registerLoading").style.display="none";
-                document.getElementById("error").innerHTML = "User Doesnt Exist";
+                // document.getElementById("error").innerHTML = "User Doesnt Exist";
+                errorRef.current.innerHTML = "User Doesnt Exist";
                 setTimeout(()=>{
                   seterror(false);
                 },3000);
@@ -73,7 +76,9 @@ export default function Login() {
             .catch((err)=>{
               document.getElementById("registerLoading").style.display="none";
               document.getElementById("logIn").style.display="none";
-              document.getElementById("error").innerHTML =  "Credentials are wrong";
+              // document.getElementById("error").innerHTML =  "Credentials are wrong";
+              errorRef.current.innerHTML = "Credentials are wrong";
+
               setTimeout(()=>{
                 seterror(false);
               },5000);
@@ -87,7 +92,7 @@ export default function Login() {
           else
           { 
             
-            document.getElementById("error").innerHTML = "Please fill all the fields correctly";
+            errorRef.current.innerHTML = "Please fill all the fields";
             setTimeout(()=>{
               seterror(false);
             },500);
@@ -127,7 +132,8 @@ export default function Login() {
           <button type='submit' className='btn btn-primary'>Login</button>
           <span id="logIn" style={{color:"green",display:"none"}}>Loggin in ...</span>
           <center><div class="lds-roller mt-5" id="registerLoading" style={{display:"none"}}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>
-          {error && <p id="error"></p>}
+          {error && <p  ref={errorRef}
+          id="error" ></p>}
          
         </form>
         <div className='text' >
