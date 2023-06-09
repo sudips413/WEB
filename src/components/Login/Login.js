@@ -92,7 +92,7 @@ export default function Login() {
           else
           { 
             
-            errorRef.current.innerHTML = "Please fill all the fields";
+            errorRef.current.innerHTML = "Please fill all the fields!";
             setTimeout(()=>{
               seterror(false);
             },500);
