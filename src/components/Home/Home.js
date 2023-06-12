@@ -88,7 +88,7 @@ function Home() {
                     <PostBottomActions post={post}  key={index} />
                 </div>
             </div>  
-            {/* <hr className='post-separater'/> */}
+            {/* <hr className='post-separater'/> */}           
             </>
         )        
         }):
@@ -109,8 +109,35 @@ function Home() {
     }
     {/* sroll to top       */}
     
+    <div className="accept-cookies">
+        <div className="cookie-container" style={{
+            display:"flex",
+            justifyContent:"space-between",
+            alignItems:"center",
+            padding:"0 10px",
+            position:"fixed",
+            bottom:"20px",
+            left:"20px",
+            width:"40%",
+            border:"1px solid #ccc",
+            backgroundColor:"#fff",
+            borderRadius:"10px",
+
+        }}>
+            <p>
+                We use cookies in this website to give you the best experience on our site and show you relevant ads. To find out more, read our
+                <a href="#" className="cookie-link"> privacy policy</a> and <a href="#" className="cookie-link">cookie policy</a>.
+            </p>
+            <button className="btn btn-primary" onClick={()=>{
+                window.localStorage.setItem("accept-cookies","true");
+                document.querySelector(".accept-cookies").style.display="none";
+            }}>Accept</button>
+        </div>
+    </div>
     {
         // show top button only when the screen is scrolled down to 500px
+    
+    
         
     <button onClick={()=>{
         window.scrollTo(0,0);

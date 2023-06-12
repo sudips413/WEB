@@ -17,6 +17,7 @@ import Create from "./components/Edit/Create";
 import Footer from "./components/Footer/Footer";
 import SinglePost from "./components/SinglePost/SinglePost";
 import axios from "axios";
+import GoogleTagManager from "./components/googleAnalytics/GoogleTagManager";
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <>
+      <GoogleTagManager />
       <div className="page-container">
         <Router>
           <div className="content-wrap">

@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import axios from 'axios';
 import allActions from '../../actions';
 import './login.css'
+import GoogleTagManager from '../googleAnalytics/GoogleTagManager';
 export default function Login() {
     
     const [email,setemail] = React.useState("");
@@ -46,7 +47,8 @@ export default function Login() {
                   // set id in local storage                 
 
                 }
-      
+                
+                      
                 document.getElementById("registerLoading").style.display="none";
                 localStorage.setItem("id",res.data.user._id);
                 dispatch(allActions.userActions.set_registration_status(false));
@@ -58,6 +60,7 @@ export default function Login() {
                 })                   
                 navigate("/");
                 document.getElementById("logIn").style.display="none";
+                GoogleTagManager.trackLogin(obj);
                     
                 
               }
@@ -92,7 +95,7 @@ export default function Login() {
           else
           { 
             
-            errorRef.current.innerHTML = "Please fill all the fields!";
+            errorRef.current.innerHTML = "Please fill all the fields";
             setTimeout(()=>{
               seterror(false);
             },500);
