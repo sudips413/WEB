@@ -84,6 +84,40 @@ function App() {
             </Routes>
           </div>
           <Footer />
+          {
+            localStorage.getItem("accept-cookies") !== "" ? null : (
+          
+          <div className="accept-cookies col-lg">
+            <div className="cookie-container" style={{
+              backgroundColor:"#F7D49A ",
+                display:"flex",
+                justifyContent:"space-between",
+                alignItems:"center",
+                padding:"0 10px",
+                position:"fixed",
+                bottom:"20px",
+                left:"20px",
+                // width:"40%",
+                border:"1px solid #ccc",
+                borderRadius:"10px",
+
+            }}> <p>
+                    We use cookies in this website to give you the best experience on our site and show you relevant ads. To find out more, read our
+                    <a href="#" className="cookie-link"> privacy policy</a> and <a href="#" className="cookie-link">cookie policy</a>.
+                </p>
+                <button className="btn btn-success cookie-accept" onClick={()=>{
+                    window.localStorage.setItem("accept-cookies","true");
+                    document.querySelector(".accept-cookies").style.display="none";
+                }}>Accept</button>
+                <button className="btn btn-danger cookie-decline" 
+                onClick={()=>{
+                    window.localStorage.setItem("accept-cookies","false");
+                    document.querySelector(".accept-cookies").style.display="none";
+                }}>Decline</button> 
+            </div>
+          </div>
+            )
+              }
         </Router>
       </div>
     </>

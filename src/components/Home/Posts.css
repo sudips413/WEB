@@ -80,6 +80,13 @@ h3,p,span{
   background-color: rgb(129, 185, 235);
   color: black  ;
 }
+.cookie-accept,.cookie-decline{
+    border-radius: 5px;
+    border:none;
+    background-color: rgb(129, 185, 235);
+    color: black  ;
+    margin: 5px;
+}
 @media screen and (max-width:746px){
     .PostImage{
         width: 100%;
@@ -90,12 +97,14 @@ h3,p,span{
         margin-top: -10px;
         display: flex;
         flex-direction: column;
-        align-items: start;
-
-        
-
-    
+        align-items: start; 
     }
+    .cookie-container{
+      display: flex;
+      flex-direction: column;
+    }
+    
+
     .card-body{
         display: grid  ;
         grid-template-columns:1fr;
