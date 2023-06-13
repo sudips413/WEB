@@ -1,5 +1,5 @@
+// main app
 import React, { useEffect } from "react";
-
 import { useDispatch } from "react-redux";
 import allActions from "./actions";
 import './App.css';
