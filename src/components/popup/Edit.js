@@ -60,9 +60,9 @@ export default function Edit({closepopup,content}) {
 						apiKey="uysetdm5b097olv64hv0dduduaq16b12fzw935px9x45rfxq"
 						init={{
 							height: 300,
-								plugins: [
-									"a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
-								],
+								// plugins: [
+								// 	"a11ychecker advcode advlist advtable anchor autocorrect autosave editimage image link linkchecker lists media mediaembed pageembed powerpaste searchreplace table template tinymcespellchecker typography visualblocks wordcount",
+								// ],
 								toolbar:
 									"undo redo | blocks fontfamily fontsize | bold italic underline forecolor backcolor | alignleft aligncenter alignright alignjustify lineheight | removeformat | link ",
 								menubar: false,
