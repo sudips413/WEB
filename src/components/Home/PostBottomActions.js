@@ -11,7 +11,6 @@ function PostBottomActions({post,index}) {
     // const [commentCount,setcommentCount] = React.useState(post.comment.length-1);
     const [views,setviews] = React.useState(post.views);
     const comments = useSelector(state => state.commentReducer);
-    console.log(post)
     function handleDisplayClick(){
         setshowComments(!showComments);
     }
