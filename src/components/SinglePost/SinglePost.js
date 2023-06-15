@@ -7,6 +7,8 @@ import axios from 'axios';
 import "./singlepost.css";
 import PostBottomActions from '../Home/PostBottomActions';
 import Post from '../Home/Post';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import { Link, Typography } from '@mui/material';
 
 
 function SinglePost() {
@@ -30,17 +32,45 @@ function SinglePost() {
             }
         }
     }
+
+    const breadcrumbs = [
+        <a href="/" onClick={(e)=>{
+            e.preventDefault();
+            navigate("/");
+        }} style={{color:"blue",fontSize:"15px",cursor:"pointer"}}>Home</a>,
+        <Typography style={{color:"black",fontSize:"15px"}}>Posts</Typography>,
+        <Typography style={{
+            color:"red",
+        }}>
+        {Name()}</Typography>
+    ];
   return (    
     <div className='container'>
     <div className='row mt-5'>
         <div className='col-lg-4 col-md-4 col-sm-8 col-xs-10'>
         <div className='card'>
             <div className='card-category'>
-                <span style={
+                {/* <span style={
                     {color:"blue",fontSize:"15px",cursor:"pointer"}
                 }><h5 onClick={()=>{
                     navigate("/");
-                }}>Home</h5>singlepost{" >>"}{Name()}</span>
+                }}>Home</h5>singlepost{" >>"}{Name()}</span> */}
+                <Breadcrumbs
+                    sx={{
+                        fontSize: '15px',
+                        color: 'blue',
+                        cursor: 'pointer',
+                        margin: '20px 20px 20px 20px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        whiteSpace: 'nowrap',
+                        maxWidth: '400px', // Adjust the maximum width as needed
+                    }}
+                    separator="/"
+                    aria-label="breadcrumb"
+                    >
+                    {breadcrumbs}
+                </Breadcrumbs>
                 {
                     posts.map((post,index)=>{
                         return(
