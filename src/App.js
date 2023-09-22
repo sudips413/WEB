@@ -85,18 +85,18 @@ function App() {
           </div>
           <Footer />
           {
-            localStorage.getItem("accept-cookies") !== "" ? null : (
+            // check if the accept-cookies exists in the local storage or not
+            localStorage.getItem("accept-cookies") !== null ? null : (
           
           <div className="accept-cookies col-lg">
             <div className="cookie-container" style={{
-              backgroundColor:"#F7D49A ",
+                backgroundColor:"#F7D49A ",
                 display:"flex",
                 justifyContent:"space-between",
                 alignItems:"center",
                 padding:"0 10px",
                 position:"fixed",
-                bottom:"20px",
-                left:"20px",
+                bottom:"50px",
                 // width:"40%",
                 border:"1px solid #ccc",
                 borderRadius:"10px",

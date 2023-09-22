@@ -10,6 +10,11 @@ import Edit from '../popup/Edit';
 import allActions from '../../actions';
 import PostBottomActions from './PostBottomActions';
 import Post from './Post';
+import LoadingPlaceholder from './SkeletonLoading';
+import {
+    Box,
+    Skeleton,
+  } from '@mui/material';
 function Home() {
 
   const [title,settitle] = useState("");
@@ -23,7 +28,7 @@ function Home() {
   const acceptCookies = localStorage.getItem("accept-cookies");
     const fetchposts = async()=>{
         
-    if (!id && posts===[] ){ 
+    if (!id && posts.length===0 ){ 
              
         await axios.get("https://blog-1pne.onrender.com/api/posts")   
         .then(res=>{
@@ -40,7 +45,13 @@ function Home() {
   return (
     
     <div className='container container-width'>
-        {isLoading? <center style={{marginTop:"20%",color:"red"}}><span color={"red"}>Loading Might take more than 5sec...</span><br/><div class="lds-roller mt-5"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></center>:null}
+        
+        {isLoading? 
+        <>
+        <LoadingPlaceholder/>
+        <LoadingPlaceholder/>
+        </>
+        :null}
         { posts? posts.map((post,index)=>{
             // dispatch(allActions.add_comment(post.comment));
             
